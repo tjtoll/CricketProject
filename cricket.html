@@ -15,10 +15,12 @@
 
 </style>
 
-<div class="container" id="field0">
-</div>
+
 
 <div class="container" id="field">
+</div>
+
+<div class="container" id="batArea">
 </div>
 
 <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
@@ -39,6 +41,9 @@
             cricketField.attr("transform", "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")")
         }))
         .append('g');
+
+
+
 
     d3.csv("cricketdummy.csv", function(cricketdummy){
 
@@ -77,14 +82,12 @@
         console.log(batScore);
 
         function drawCricketField() {
-        //Position of Field
+            //Position of Field
             var d = document.getElementById('field');
             d.style.position = "absolute";
             d.style.left = 25+'px';
             d.style.top = 25+'px';
             //Field size variables
-
-
             var outfieldShapeFactor = 1.09;
             var infieldShapeFactor = 1.04;
             var centerOfFieldFactor = 2;
@@ -175,20 +178,48 @@
             var batScoreArea = cricketField.append("circle")
                 .data(batScore)
                 .attr("id","barScoreCircle")
-                .attr("cx", fieldSVGWidth/5)
-                .attr("cy", fieldSVGHeight/5)
+                .attr("cx", fieldSVGWidth/centerOfFieldFactor )
+                .attr("cy", fieldSVGHeight/centerOfFieldFactor - closeInfieldOffset - 15)
                 .attr("r", function (d) {
                     return d.values
                 })
                 .attr("fill",  "none")
-                .attr("stroke", "#f6f9f9")
-                .style("stroke-dasharray", ("10,3"))
+                .attr("stroke", "#2025c5")
+                //.style("stroke-dasharray", ("10,3"))
                 .style("stroke-width", 2);
 
         }
 
         drawCricketField();
 
+        function batScoreArea() {
+            var data = [
+                {start: -.5 * Math.PI, size: 1 * Math.PI, color: "red"},
+            ];
+            var arc = d3.svg.arc()
+                .innerRadius(0)
+                .outerRadius(43)
+                .startAngle(function(d, i){return d.start;})
+                .endAngle(function(d, i){return d.start + d.size;})
+            ;
+
+            var chart = cricketField.append("svg")
+                .attr("width", 420)
+                .attr("height", 420).append("svg:g")
+                .attr("transform", "translate(250,264)")
+            ;
+
+            chart.selectAll("path")
+                .data(data)
+                .enter().append("svg:path")
+                .style("opacity", .5)
+                .style("fill", function(d, i){
+                    return d.color;
+                })
+                .attr("d", arc)
+            ;
+        }
+        batScoreArea()
 
 
 

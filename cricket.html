@@ -5,124 +5,171 @@
     <title>Title</title>
 </head>
 <body>
+<style>
+
+#inds{
+    position:absolute;
+    top:10px;
+    left:55px;
+}
+
+}
+</style>
+
+<div class="container" id="field0">
+</div>
 
 <div class="container" id="field">
 </div>
 
-
 <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 
+<select id="inds">
+    <option value="apples" selected="selected">apples</option>
+    <option value="pears">pears</option>
+    <option value="tomatoes">tomatoes</option>
+</select>
 
 <script type="text/javascript">
 
-
-function drawCricketField() {
-//Position of Field
-    var d = document.getElementById('field');
-    d.style.position = "absolute";
-    d.style.left = 25+'px';
-    d.style.top = 10+'px';
-    //Field size variables
-
-    var fieldSVGHeight = 600;
-    var fieldSVGWidth = 500;
-    var outfieldShapeFactor = 1.09;
-    var infieldShapeFactor = 1.04;
-    var centerOfFieldFactor = 2;
-    var fieldWhiteBorderWidths = 4;
-    var pitchWidth = (fieldSVGWidth/12);
-    var pitchHeight = (fieldSVGHeight/5);
-    var closeInfieldOffset = 35;
-    var closeInfieldLineLength = 75;
+var fieldSVGHeight = 600;
+var fieldSVGWidth = 500;
+var cricketField = d3.select("#field").append("svg")
+    .attr("width", fieldSVGWidth)
+    .attr("height", fieldSVGHeight)
+    .call(d3.behavior.zoom().on("zoom", function () {
+        cricketField.attr("transform", "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")")
+    }))
+    .append('g');
 
 
-    var cricketField = d3.select("#field").append("svg")
-        .attr("width", fieldSVGWidth)
-        .attr("height", fieldSVGHeight)
-        .call(d3.behavior.zoom().on("zoom", function () {
-            cricketField.attr("transform", "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")")
-        }))
-        .append('g');
+    d3.csv("cricketdummy.csv", function(cricketdummy){
 
-    var outfieldBase = cricketField.append("ellipse")
-        .attr("cx", fieldSVGWidth/centerOfFieldFactor)
-        .attr("cy", fieldSVGHeight/centerOfFieldFactor)
-        .attr("rx", fieldSVGWidth/2)
-        .attr("ry", (fieldSVGHeight/2)/outfieldShapeFactor )
-        .attr("fill",  "#008451");
+        var batScore = d3.nest()
+            .key(function(d) { return d.Year;})
+            .rollup(function(d) {
+                return d3.sum(d, function(d) {return d.BatScore; });
+            }).entries(cricketdummy);
 
-    var outfieldBaseWhiteBorder = cricketField.append("ellipse")
-        .attr("cx", fieldSVGWidth/centerOfFieldFactor)
-        .attr("cy", fieldSVGHeight/centerOfFieldFactor)
-        .attr("rx", fieldSVGWidth/2.06)
-        .attr("ry", (fieldSVGHeight/2.06)/outfieldShapeFactor )
-        .attr("fill",  "none")
-        .attr("stroke", "#f6f9f9")
-        .style("stroke-width", fieldWhiteBorderWidths)
+        function drawCricketField() {
+        //Position of Field
+            var d = document.getElementById('field');
+            d.style.position = "absolute";
+            d.style.left = 25+'px';
+            d.style.top = 25+'px';
+            //Field size variables
 
 
-    var infieldBase = cricketField.append("ellipse")
-        .attr("cx", fieldSVGWidth/centerOfFieldFactor)
-        .attr("cy", fieldSVGHeight/centerOfFieldFactor)
-        .attr("rx", fieldSVGWidth/3.25)
-        .attr("ry", (fieldSVGHeight/3.25)/infieldShapeFactor )
-        .attr("fill",  "#00902e");
+            var outfieldShapeFactor = 1.09;
+            var infieldShapeFactor = 1.04;
+            var centerOfFieldFactor = 2;
+            var fieldWhiteBorderWidths = 4;
+            var pitchWidth = (fieldSVGWidth/12);
+            var pitchHeight = (fieldSVGHeight/5);
+            var closeInfieldOffset = 35;
+            var closeInfieldLineLength = 75;
 
-    var infieldBaseWhiteBorder = cricketField.append("ellipse")
-        .attr("cx", fieldSVGWidth/centerOfFieldFactor)
-        .attr("cy", fieldSVGHeight/centerOfFieldFactor)
-        .attr("rx", fieldSVGWidth/3.25)
-        .attr("ry", (fieldSVGHeight/3.25)/infieldShapeFactor )
-        .attr("fill",  "none")
-        .attr("stroke", "#f6f9f9")
-        .style("stroke-width", fieldWhiteBorderWidths)
+            var outfieldBase = cricketField.append("ellipse")
+                .attr("cx", fieldSVGWidth/centerOfFieldFactor)
+                .attr("cy", fieldSVGHeight/centerOfFieldFactor)
+                .attr("rx", fieldSVGWidth/2)
+                .attr("ry", (fieldSVGHeight/2)/outfieldShapeFactor )
+                .attr("fill",  "#008451");
 
-    var closeinfieldTop = cricketField.append("circle")
-        .attr("cx", fieldSVGWidth/centerOfFieldFactor)
-        .attr("cy", fieldSVGHeight/centerOfFieldFactor - closeInfieldOffset)
-        .attr("r", fieldSVGWidth/11)
-        .attr("fill",  "none")
-        .style("stroke-dasharray", ("10,3"))
-        .attr("stroke", "#f6f9f9")
-        .style("stroke-width", 2)
-
-    var closeinfieldBottom = cricketField.append("circle")
-        .attr("cx", fieldSVGWidth/centerOfFieldFactor)
-        .attr("cy", fieldSVGHeight/centerOfFieldFactor + closeInfieldOffset)
-        .attr("r", fieldSVGWidth/11)
-        .attr("fill",  "none")
-        .attr("stroke", "#f6f9f9")
-        .style("stroke-dasharray", ("10,3"))
-        .style("stroke-width", 2)
-
-    var pitchArea = cricketField.append("rect")
-        .attr("x", (fieldSVGWidth/centerOfFieldFactor) - pitchWidth/2)
-        .attr("y", (fieldSVGHeight/centerOfFieldFactor) - pitchHeight/2)
-        .attr("width", pitchWidth)
-        .attr("height", pitchHeight)
-        .attr("fill",  "#fff16e")
-        .attr("stroke", "#f6f9f9")
-        .style("stroke-width", .5);
+            var outfieldBaseWhiteBorder = cricketField.append("ellipse")
+                .attr("cx", fieldSVGWidth/centerOfFieldFactor)
+                .attr("cy", fieldSVGHeight/centerOfFieldFactor)
+                .attr("rx", fieldSVGWidth/2.06)
+                .attr("ry", (fieldSVGHeight/2.06)/outfieldShapeFactor )
+                .attr("fill",  "none")
+                .attr("stroke", "#f6f9f9")
+                .style("stroke-width", fieldWhiteBorderWidths)
 
 
-    var closeInfieldTopLine = cricketField.append("line")
-        .attr("x1", (fieldSVGWidth/centerOfFieldFactor - closeInfieldLineLength) )
-        .attr("y1", (fieldSVGHeight/centerOfFieldFactor - closeInfieldOffset) )
-        .attr("x2", (fieldSVGWidth/centerOfFieldFactor + closeInfieldLineLength) )
-        .attr("y2", (fieldSVGHeight/centerOfFieldFactor - closeInfieldOffset) )
-        .attr("stroke", "#f6f9f9")
-        .style("stroke-width", 1.5);
+            var infieldBase = cricketField.append("ellipse")
+                .attr("cx", fieldSVGWidth/centerOfFieldFactor)
+                .attr("cy", fieldSVGHeight/centerOfFieldFactor)
+                .attr("rx", fieldSVGWidth/3.25)
+                .attr("ry", (fieldSVGHeight/3.25)/infieldShapeFactor )
+                .attr("fill",  "#00902e");
 
-    var closeInfieldBottomLine = cricketField.append("line")
-        .attr("x1", (fieldSVGWidth/centerOfFieldFactor - closeInfieldLineLength) )
-        .attr("y1", (fieldSVGHeight/centerOfFieldFactor + closeInfieldOffset) )
-        .attr("x2", (fieldSVGWidth/centerOfFieldFactor + closeInfieldLineLength) )
-        .attr("y2", (fieldSVGHeight/centerOfFieldFactor + closeInfieldOffset) )
-        .attr("stroke", "#f6f9f9")
-        .style("stroke-width", 1.5);
-}
+            var infieldBaseWhiteBorder = cricketField.append("ellipse")
+                .attr("cx", fieldSVGWidth/centerOfFieldFactor)
+                .attr("cy", fieldSVGHeight/centerOfFieldFactor)
+                .attr("rx", fieldSVGWidth/3.25)
+                .attr("ry", (fieldSVGHeight/3.25)/infieldShapeFactor )
+                .attr("fill",  "none")
+                .attr("stroke", "#f6f9f9")
+                .style("stroke-width", fieldWhiteBorderWidths)
 
-drawCricketField()
+            var closeinfieldTop = cricketField.append("circle")
+                .attr("id","closeinfieldTop")
+                .attr("cx", fieldSVGWidth/centerOfFieldFactor)
+                .attr("cy", fieldSVGHeight/centerOfFieldFactor - closeInfieldOffset)
+                .attr("r", fieldSVGWidth/11)
+                .attr("fill",  "none")
+                .style("stroke-dasharray", ("10,3"))
+                .attr("stroke", "#f6f9f9")
+                .style("stroke-width", 2);
+
+            var closeinfieldBottom = cricketField.append("circle")
+                .attr("cx", fieldSVGWidth/centerOfFieldFactor)
+                .attr("cy", fieldSVGHeight/centerOfFieldFactor + closeInfieldOffset)
+                .attr("r", fieldSVGWidth/11)
+                .attr("fill",  "none")
+                .attr("stroke", "#f6f9f9")
+                .style("stroke-dasharray", ("10,3"))
+                .style("stroke-width", 2);
+
+            var pitchArea = cricketField.append("rect")
+                .attr("x", (fieldSVGWidth/centerOfFieldFactor) - pitchWidth/2)
+                .attr("y", (fieldSVGHeight/centerOfFieldFactor) - pitchHeight/2)
+                .attr("width", pitchWidth)
+                .attr("height", pitchHeight)
+                .attr("fill",  "#fff16e")
+                .attr("stroke", "#f6f9f9")
+                .style("stroke-width", .5);
+
+
+            var closeInfieldTopLine = cricketField.append("line")
+                .attr("x1", (fieldSVGWidth/centerOfFieldFactor - closeInfieldLineLength) )
+                .attr("y1", (fieldSVGHeight/centerOfFieldFactor - closeInfieldOffset) )
+                .attr("x2", (fieldSVGWidth/centerOfFieldFactor + closeInfieldLineLength) )
+                .attr("y2", (fieldSVGHeight/centerOfFieldFactor - closeInfieldOffset) )
+                .attr("stroke", "#f6f9f9")
+                .style("stroke-width", 1.5);
+
+            var closeInfieldBottomLine = cricketField.append("line")
+                .attr("x1", (fieldSVGWidth/centerOfFieldFactor - closeInfieldLineLength) )
+                .attr("y1", (fieldSVGHeight/centerOfFieldFactor + closeInfieldOffset) )
+                .attr("x2", (fieldSVGWidth/centerOfFieldFactor + closeInfieldLineLength) )
+                .attr("y2", (fieldSVGHeight/centerOfFieldFactor + closeInfieldOffset) )
+                .attr("stroke", "#f6f9f9")
+                .style("stroke-width", 1.5);
+
+
+            var batScoreArea = cricketField.append("circle")
+                .attr("id","barScoreCircle")
+                .attr("cx", fieldSVGWidth/5)
+                .attr("cy", fieldSVGHeight/5)
+                .attr("r", 15)
+                .attr("fill",  "none")
+                .attr("stroke", "#f6f9f9")
+                .style("stroke-dasharray", ("10,3"))
+                .style("stroke-width", 2);
+
+        }
+
+        drawCricketField();
+
+        var u = cricketField.select("#barScoreCircle")
+            .attr("r",25)
+
+
+    });
+
+
 
 </script>
 </body>

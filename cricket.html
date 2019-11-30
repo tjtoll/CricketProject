@@ -7,13 +7,12 @@
 <body>
 <style>
 
-#inds{
+#yearFilterSelection{
     position:absolute;
     top:10px;
-    left:55px;
+    left:550px;
 }
 
-}
 </style>
 
 <div class="container" id="field0">
@@ -25,32 +24,57 @@
 <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 
-<select id="inds">
-    <option value="apples" selected="selected">apples</option>
-    <option value="pears">pears</option>
-    <option value="tomatoes">tomatoes</option>
-</select>
+<select id="yearFilterSelection"></select>
 
 <script type="text/javascript">
 
-var fieldSVGHeight = 600;
-var fieldSVGWidth = 500;
-var cricketField = d3.select("#field").append("svg")
-    .attr("width", fieldSVGWidth)
-    .attr("height", fieldSVGHeight)
-    .call(d3.behavior.zoom().on("zoom", function () {
-        cricketField.attr("transform", "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")")
-    }))
-    .append('g');
 
+
+    var fieldSVGHeight = 600;
+    var fieldSVGWidth = 500;
+    var cricketField = d3.select("#field").append("svg")
+        .attr("width", fieldSVGWidth)
+        .attr("height", fieldSVGHeight)
+        .call(d3.behavior.zoom().on("zoom", function () {
+            cricketField.attr("transform", "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")")
+        }))
+        .append('g');
 
     d3.csv("cricketdummy.csv", function(cricketdummy){
 
+
+        // populating the years in the filter drop down
+        d3.select("#yearFilterSelection")
+            .selectAll('myOptions')
+            .data(cricketdummy)
+            .enter()
+            .append('option')
+            .text(function (d) { return d.Year; })
+            .attr("value", function (d) { return d.Year; });
+        // changing the area scores based on the year selection
+        d3.select("#yearFilterSelection").on("change", function(d) {
+            var selectedOption = d3.select(this).property("value");
+
+            var batScore = d3.nest()
+                .key(function(d) { return d.Year;})
+                .rollup(function(d) {
+                    return d3.sum(d, function(d) {return d.BatScore; });
+                }).entries(cricketdummy.filter(function(d){return d.Year == selectedOption;}));
+
+            var u = cricketField.select("#barScoreCircle")
+                .data(batScore)
+                .attr("r",function (d) {
+                    return d.values
+                })
+        });
+        // aggregating the bat score data by year
         var batScore = d3.nest()
             .key(function(d) { return d.Year;})
             .rollup(function(d) {
                 return d3.sum(d, function(d) {return d.BatScore; });
-            }).entries(cricketdummy);
+            }).entries(cricketdummy.filter(function(d){return d.Year == 2009;}));
+
+        console.log(batScore);
 
         function drawCricketField() {
         //Position of Field
@@ -148,12 +172,14 @@ var cricketField = d3.select("#field").append("svg")
                 .attr("stroke", "#f6f9f9")
                 .style("stroke-width", 1.5);
 
-
             var batScoreArea = cricketField.append("circle")
+                .data(batScore)
                 .attr("id","barScoreCircle")
                 .attr("cx", fieldSVGWidth/5)
                 .attr("cy", fieldSVGHeight/5)
-                .attr("r", 15)
+                .attr("r", function (d) {
+                    return d.values
+                })
                 .attr("fill",  "none")
                 .attr("stroke", "#f6f9f9")
                 .style("stroke-dasharray", ("10,3"))
@@ -163,8 +189,7 @@ var cricketField = d3.select("#field").append("svg")
 
         drawCricketField();
 
-        var u = cricketField.select("#barScoreCircle")
-            .attr("r",25)
+
 
 
     });

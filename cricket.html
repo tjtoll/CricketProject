@@ -46,11 +46,11 @@
         // populating the years in the filter drop down
         d3.select("#yearFilterSelection")
             .selectAll('myOptions')
-            .data(cricketdummy)
+            .data(d3.map(cricketdummy, function(d){return d.Year;}).keys())
             .enter()
             .append('option')
-            .text(function (d) { return d.Year; })
-            .attr("value", function (d) { return d.Year; });
+            .text(function(d){return d;})
+            .attr("value",function(d){return d;});
         // changing the area scores based on the year selection
         d3.select("#yearFilterSelection").on("change", function(d) {
             var selectedOption = d3.select(this).property("value");
@@ -72,7 +72,7 @@
             .key(function(d) { return d.Year;})
             .rollup(function(d) {
                 return d3.sum(d, function(d) {return d.BatScore; });
-            }).entries(cricketdummy.filter(function(d){return d.Year == 2009;}));
+            }).entries(cricketdummy.filter(function(d){return d.Year == d3.select("#yearFilterSelection").property("value");}));
 
         console.log(batScore);
 

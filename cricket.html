@@ -42,9 +42,6 @@
         }))
         .append('g');
 
-
-
-
     d3.csv("cricketdummy.csv", function(cricketdummy){
 
 
@@ -188,39 +185,77 @@
                 //.style("stroke-dasharray", ("10,3"))
                 .style("stroke-width", 2);
 
-        }
+            var batScoreAreaLabel = cricketField.append("text")
+                .attr("x", fieldSVGWidth/centerOfFieldFactor)
+                .attr("y", fieldSVGHeight/centerOfFieldFactor - closeInfieldOffset - 50)
+                .attr("text-anchor", "middle")
+                .style("font-size", "12px")
+                .style("fill", "#f6f9f9")
+                .style("font-family", "Helvetica")
+                .text("Batting");
 
+            var bowlScoreAreaLabel = cricketField.append("text")
+                .attr("x", fieldSVGWidth/centerOfFieldFactor)
+                .attr("y", fieldSVGHeight/centerOfFieldFactor + closeInfieldOffset + 60)
+                .attr("text-anchor", "middle")
+                .style("font-size", "12px")
+                .style("fill", "#f6f9f9")
+                .style("font-family", "Helvetica")
+                .text("Bowling");
+
+        }
         drawCricketField();
 
-        function batScoreArea() {
+        function scoreAreas() {
             var data = [
-                {start: -.5 * Math.PI, size: 1 * Math.PI, color: "red"},
+                {start: -.5 * Math.PI, size: 1 * Math.PI, color: "red", startbottom: .5 * Math.PI},
             ];
-            var arc = d3.svg.arc()
+            var arcTop = d3.svg.arc()
                 .innerRadius(0)
                 .outerRadius(43)
-                .startAngle(function(d, i){return d.start;})
-                .endAngle(function(d, i){return d.start + d.size;})
-            ;
+                .startAngle(function(d){return d.start;})
+                .endAngle(function(d){return d.start + d.size;});
 
             var chart = cricketField.append("svg")
                 .attr("width", 420)
                 .attr("height", 420).append("svg:g")
-                .attr("transform", "translate(250,264)")
-            ;
+                .attr("transform", "translate(250,264)");
 
             chart.selectAll("path")
                 .data(data)
                 .enter().append("svg:path")
                 .style("opacity", .5)
-                .style("fill", function(d, i){
+                .style("fill", function(d){
                     return d.color;
                 })
-                .attr("d", arc)
-            ;
-        }
-        batScoreArea()
+                .attr("d", arcTop);
 
+            var arcBottom = d3.svg.arc()
+                .innerRadius(0)
+                .outerRadius(43)
+                .startAngle(function(d){return d.startbottom;})
+                .endAngle(function(d){return d.startbottom + d.size;})
+            ;
+
+            var chartBottom = cricketField.append("svg")
+                .attr("width", 420)
+                .attr("height", 420).append("svg:g")
+                .attr("transform", "translate(250,336)")
+            ;
+
+            chartBottom.selectAll("path")
+                .data(data)
+                .enter().append("svg:path")
+                .style("opacity", .5)
+                .style("fill", function(d){
+                    return d.color;
+                })
+                .attr("d", arcBottom)
+        }
+        scoreAreas();
+
+
+    console.log(batScore)
 
 
     });

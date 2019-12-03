@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Cricket!</title>
 </head>
 <body>
 <style>
@@ -92,14 +92,26 @@
                 })
         });
 
+
         // aggregating the bat score data by year
+        filteredToYear = cricketdummy.filter(function(d){return d.Year == d3.select("#yearFilterSelection").property("value");});
         var batScore = d3.nest()
             .key(function(d) { return d.Year;})
-            .rollup(function(v) { return {
-                BatScore: d3.mean(v, function(d) { return d.BatScore; }),
-                //BatScoreSD: d3.deviation(v, function(d) { return d.BatScore; }),
-                gender: d3.mean(v, function(d) { return d.BatScore; })
-            }; }).entries(cricketdummy.filter(function(d){return d.Year == d3.select("#yearFilterSelection").property("value");}));
+            .rollup(function(d) { return {
+                BatScoreAgg: d3.mean(d, function(d) { return d.BatScore; }),
+                BatScoreAggSD: d3.deviation(d, function(d) { return d.BatScore; }),
+                BatScore: d3.sum(d, function(d) { if (d.Team  == d3.select("#teamFilterSelection").property("value") ) { return d.BatScore }
+                    else { return 0 }
+                    ; })
+            }; }).entries(filteredToYear);
+
+       // var batScore = d3.nest()
+       //     .key(function(d) { return d.Year;})
+       //     .rollup(function(v) { return {
+       //         BatScore: d3.mean(v, function(d) { return d.BatScore; }),
+       //         gender: d3.mean(v, function(d) { return d.BatScore; })
+       //     }; }).entries(filteredToYear.filter(function(d){return d.Team == d3.select("#teamFilterSelection").property("value");}));
+
 
 
         function drawCricketField() {
@@ -244,7 +256,7 @@
                 .data(batScore)
                 .enter().append("svg:path")
                 .style("opacity", function (d) {
-                    return batScore.BatScore
+                    return d.BatScore
                 })
                 .style("fill",  "#323c84")
                 .attr("d", arcTop);
@@ -266,9 +278,13 @@
                 .data(batScore)
                 .enter().append("svg:path")
                 .style("opacity", function (d) {
-                    return batScore.BatScore
+                    return d.BatScore
                 })
-                .style("fill",  "#323c84")
+                .style("fill",  function(d) {
+                    if (d.BatScore + d.BatScoreSD == 3 ) { return "#415ec5" }
+                    if (d.BatScore == 2 ) { return "#c57a1a" }
+                    else { return "black" }
+                    ; } )
                 .attr("d", arcBottom);
 
 

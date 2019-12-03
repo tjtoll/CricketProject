@@ -10,8 +10,12 @@
 #yearFilterSelection{
     position:absolute;
     top:10px;
-    left:550px;
-}
+    left:550px;}
+
+#teamFilterSelection{
+    position:absolute;
+    top:10px;
+    left:625px;}
 
 </style>
 
@@ -27,6 +31,7 @@
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 
 <select id="yearFilterSelection"></select>
+<select id="teamFilterSelection"></select>
 
 <script type="text/javascript">
 
@@ -34,6 +39,14 @@
 
     var fieldSVGHeight = 600;
     var fieldSVGWidth = 500;
+    var outfieldShapeFactor = 1.09;
+    var infieldShapeFactor = 1.04;
+    var centerOfFieldFactor = 2;
+    var fieldWhiteBorderWidths = 4;
+    var pitchWidth = (fieldSVGWidth/12);
+    var pitchHeight = (fieldSVGHeight/5);
+    var closeInfieldOffset = 35;
+    var closeInfieldLineLength = 75;
     var cricketField = d3.select("#field").append("svg")
         .attr("width", fieldSVGWidth)
         .attr("height", fieldSVGHeight)
@@ -45,10 +58,19 @@
     d3.csv("cricketdummy.csv", function(cricketdummy){
 
 
+
         // populating the years in the filter drop down
         d3.select("#yearFilterSelection")
             .selectAll('myOptions')
             .data(d3.map(cricketdummy, function(d){return d.Year;}).keys())
+            .enter()
+            .append('option')
+            .text(function(d){return d;})
+            .attr("value",function(d){return d;});
+        // populating the teams in the filter drop down
+        d3.select("#teamFilterSelection")
+            .selectAll('myOptions')
+            .data(d3.map(cricketdummy, function(d){return d.Team;}).keys())
             .enter()
             .append('option')
             .text(function(d){return d;})
@@ -69,14 +91,16 @@
                     return d.values
                 })
         });
+
         // aggregating the bat score data by year
         var batScore = d3.nest()
             .key(function(d) { return d.Year;})
-            .rollup(function(d) {
-                return d3.sum(d, function(d) {return d.BatScore; });
-            }).entries(cricketdummy.filter(function(d){return d.Year == d3.select("#yearFilterSelection").property("value");}));
+            .rollup(function(v) { return {
+                BatScore: d3.mean(v, function(d) { return d.BatScore; }),
+                //BatScoreSD: d3.deviation(v, function(d) { return d.BatScore; }),
+                gender: d3.mean(v, function(d) { return d.BatScore; })
+            }; }).entries(cricketdummy.filter(function(d){return d.Year == d3.select("#yearFilterSelection").property("value");}));
 
-        console.log(batScore);
 
         function drawCricketField() {
             //Position of Field
@@ -85,14 +109,7 @@
             d.style.left = 25+'px';
             d.style.top = 25+'px';
             //Field size variables
-            var outfieldShapeFactor = 1.09;
-            var infieldShapeFactor = 1.04;
-            var centerOfFieldFactor = 2;
-            var fieldWhiteBorderWidths = 4;
-            var pitchWidth = (fieldSVGWidth/12);
-            var pitchHeight = (fieldSVGHeight/5);
-            var closeInfieldOffset = 35;
-            var closeInfieldLineLength = 75;
+
 
             var outfieldBase = cricketField.append("ellipse")
                 .attr("cx", fieldSVGWidth/centerOfFieldFactor)
@@ -100,6 +117,7 @@
                 .attr("rx", fieldSVGWidth/2)
                 .attr("ry", (fieldSVGHeight/2)/outfieldShapeFactor )
                 .attr("fill",  "#008451");
+
 
             var outfieldBaseWhiteBorder = cricketField.append("ellipse")
                 .attr("cx", fieldSVGWidth/centerOfFieldFactor)
@@ -178,7 +196,7 @@
                 .attr("cx", fieldSVGWidth/centerOfFieldFactor )
                 .attr("cy", fieldSVGHeight/centerOfFieldFactor - closeInfieldOffset - 15)
                 .attr("r", function (d) {
-                    return d.values
+                    return d.BatScore
                 })
                 .attr("fill",  "none")
                 .attr("stroke", "#2025c5")
@@ -203,18 +221,19 @@
                 .style("font-family", "Helvetica")
                 .text("Bowling");
 
-        }
-        drawCricketField();
+
 
         function scoreAreas() {
-            var data = [
-                {start: -.5 * Math.PI, size: 1 * Math.PI, color: "red", startbottom: .5 * Math.PI},
-            ];
+            // half circle variables
+            var start = -.5 * Math.PI;
+            var size = Math.PI;
+            var startbottom = .5 * Math.PI;
+
             var arcTop = d3.svg.arc()
                 .innerRadius(0)
                 .outerRadius(43)
-                .startAngle(function(d){return d.start;})
-                .endAngle(function(d){return d.start + d.size;});
+                .startAngle(start)
+                .endAngle(start + size);
 
             var chart = cricketField.append("svg")
                 .attr("width", 420)
@@ -222,19 +241,19 @@
                 .attr("transform", "translate(250,264)");
 
             chart.selectAll("path")
-                .data(data)
+                .data(batScore)
                 .enter().append("svg:path")
-                .style("opacity", .5)
-                .style("fill", function(d){
-                    return d.color;
+                .style("opacity", function (d) {
+                    return batScore.BatScore
                 })
+                .style("fill",  "#323c84")
                 .attr("d", arcTop);
 
             var arcBottom = d3.svg.arc()
                 .innerRadius(0)
                 .outerRadius(43)
-                .startAngle(function(d){return d.startbottom;})
-                .endAngle(function(d){return d.startbottom + d.size;})
+                .startAngle(startbottom)
+                .endAngle(startbottom + size);
             ;
 
             var chartBottom = cricketField.append("svg")
@@ -244,18 +263,28 @@
             ;
 
             chartBottom.selectAll("path")
-                .data(data)
+                .data(batScore)
                 .enter().append("svg:path")
-                .style("opacity", .5)
-                .style("fill", function(d){
-                    return d.color;
+                .style("opacity", function (d) {
+                    return batScore.BatScore
                 })
-                .attr("d", arcBottom)
+                .style("fill",  "#323c84")
+                .attr("d", arcBottom);
+
+
+            console.log(batScore);
+            cricketField.append("ellipse")
+                .attr("cx", fieldSVGWidth/centerOfFieldFactor)
+                .attr("cy", fieldSVGHeight/centerOfFieldFactor)
+                .attr("rx", fieldSVGWidth/2)
+                .attr("ry", (fieldSVGHeight/2)/outfieldShapeFactor )
+                .style("opacity", .01)
+                .attr("fill",  "#323c84");
         }
         scoreAreas();
+        }
+        drawCricketField();
 
-
-    console.log(batScore)
 
 
     });

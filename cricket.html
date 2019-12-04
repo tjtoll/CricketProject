@@ -38,6 +38,7 @@
 
 
     var fieldSVGHeight = 600;
+    var scoreAreaOpacity = .60;
     var fieldSVGWidth = 500;
     var outfieldShapeFactor = 1.09;
     var infieldShapeFactor = 1.04;
@@ -136,6 +137,25 @@
                 BowlScoreColor = "#f4a582";
             }
             return BowlScoreColor
+        }
+        function getFieldingScoreColor(batScore)
+        {
+            var FieldingScoreColor;
+            // color is based on standard deviation
+            if (batScore[0].values.FieldingScore > batScore[0].values.FieldingScoreAggSd + batScore[0].values.FieldingScoreAggAvg) {
+                FieldingScoreColor = "#0571b0";
+            }
+            else if (batScore[0].values.FieldingScore >= batScore[0].values.FieldingScoreAggAvg) {
+                FieldingScoreColor = "#92c5de";
+            }
+            else if (batScore[0].values.FieldingScore < batScore[0].values.FieldingScoreAggSd - batScore[0].values.FieldingScoreAggAvg) {
+                FieldingScoreColor = "#ca0020";
+            }
+            else if (batScore[0].values.FieldingScore <= batScore[0].values.FieldingScoreAggAvg) {
+                FieldingScoreColor = "#f4a582";
+            }
+            return FieldingScoreColor
+
         }
         // aggregating the bat score data by year
         filteredToYear = cricketdummy.filter(function(d){return d.Year == selectedOption;});
@@ -284,7 +304,7 @@
             chart.selectAll("path")
                 .data(batScore)
                 .enter().append("svg:path")
-                .style("opacity", ".7")
+                .style("opacity", scoreAreaOpacity)
                 .style("fill", batScoreColor)
                 .attr("id", "arcTop")
                 .attr("d", arcTop)
@@ -307,20 +327,24 @@
             chartBottom.selectAll("path")
                 .data(batScore)
                 .enter().append("svg:path")
-                .style("opacity", ".7")
+                .style("opacity", scoreAreaOpacity)
                 .style("fill",  bowlScoreColor )
                 .attr("stroke", bowlScoreColor)
                 .attr("id", "arcBottom")
                 .attr("d", arcBottom);
 
-
+            var fieldScoreColor = getFieldingScoreColor(batScore);
             cricketField.append("ellipse")
+                .attr("id","fieldScoreArea")
                 .attr("cx", fieldSVGWidth/centerOfFieldFactor)
                 .attr("cy", fieldSVGHeight/centerOfFieldFactor)
-                .attr("rx", fieldSVGWidth/2)
-                .attr("ry", (fieldSVGHeight/2)/outfieldShapeFactor )
-                .style("opacity", .01)
-                .attr("fill",  "#323c84");
+                .attr("rx", fieldSVGWidth/2.5)
+                .attr("ry", (fieldSVGHeight/2.5)/outfieldShapeFactor )
+                .style("opacity", scoreAreaOpacity)
+                .attr("stroke", fieldScoreColor)
+                .style("stroke-width", 65)
+                .attr("fill", "none" );
+
         }
 
             d3.select("#yearFilterSelection").on("change", function(d) {
@@ -330,8 +354,10 @@
                 var batScore = aggregateData();
                 var batScoreColor = getBatScoreColor(batScore);
                 var bowlScoreColor = getBowlScoreColor(batScore);
+                var FieldingScoreColor = getFieldingScoreColor(batScore);
                 d3.select("#arcTop").attr("stroke", batScoreColor).style("fill",  batScoreColor );
                 d3.select("#arcBottom").attr("stroke", bowlScoreColor).style("fill",  bowlScoreColor )
+                d3.select("#fieldScoreArea").attr("stroke", FieldingScoreColor)
             });
         drawCricketField();
 

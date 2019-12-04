@@ -47,6 +47,7 @@
     var pitchHeight = (fieldSVGHeight/5);
     var closeInfieldOffset = 35;
     var closeInfieldLineLength = 75;
+    var selectedOption = 2009;
     var cricketField = d3.select("#field").append("svg")
         .attr("width", fieldSVGWidth)
         .attr("height", fieldSVGHeight)
@@ -76,43 +77,53 @@
             .text(function(d){return d;})
             .attr("value",function(d){return d;});
         // changing the area scores based on the year selection
-        d3.select("#yearFilterSelection").on("change", function(d) {
-            var selectedOption = d3.select(this).property("value");
 
-            var batScore = d3.nest()
+        function aggregateData(){
+           var dataAggregation = d3.nest()
                 .key(function(d) { return d.Year;})
-                .rollup(function(d) {
-                    return d3.sum(d, function(d) {return d.BatScore; });
-                }).entries(cricketdummy.filter(function(d){return d.Year == selectedOption;}));
-
-            var u = cricketField.select("#barScoreCircle")
-                .data(batScore)
-                .attr("r",function (d) {
-                    return d.values
-                })
-        });
-
-
-        // aggregating the bat score data by year
-        filteredToYear = cricketdummy.filter(function(d){return d.Year == d3.select("#yearFilterSelection").property("value");});
-        var batScore = d3.nest()
-            .key(function(d) { return d.Year;})
-            .rollup(function(d) { return {
-                BatScoreAgg: d3.mean(d, function(d) { return d.BatScore; }),
-                BatScoreAggSD: d3.deviation(d, function(d) { return d.BatScore; }),
-                BatScore: d3.sum(d, function(d) { if (d.Team  == d3.select("#teamFilterSelection").property("value") ) { return d.BatScore }
+                .rollup(function(d) { return {
+                    BatScoreAggAvg: d3.mean(d, function(d) { return d.BatScore; }),
+                    BatScoreAggSd: d3.deviation(d, function(d) { return d.BatScore; }),
+                    BatScore: d3.sum(d, function(d) { if (d.Team  == d3.select("#teamFilterSelection").property("value") ) { return d.BatScore }
                     else { return 0 }
-                    ; })
-            }; }).entries(filteredToYear);
+                        ; }),
+                    BowlScoreAggAvg: d3.mean(d, function(d) { return d.BowlScore; }),
+                    BowlScoreAggSd: d3.deviation(d, function(d) { return d.BowlScore; }),
+                    BowlScore: d3.sum(d, function(d) { if (d.Team  == d3.select("#teamFilterSelection").property("value") ) { return d.BowlScore }
+                    else { return 0 }
+                        ; }),
+                    FieldingScoreAggAvg: d3.mean(d, function(d) { return d.FieldingScore; }),
+                    FieldingScoreAggSd: d3.deviation(d, function(d) { return d.FieldingScore; }),
+                    FieldingScore: d3.sum(d, function(d) { if (d.Team  == d3.select("#teamFilterSelection").property("value") ) { return d.FieldingScore }
+                    else { return 0 }
+                        ; })
 
-       // var batScore = d3.nest()
-       //     .key(function(d) { return d.Year;})
-       //     .rollup(function(v) { return {
-       //         BatScore: d3.mean(v, function(d) { return d.BatScore; }),
-       //         gender: d3.mean(v, function(d) { return d.BatScore; })
-       //     }; }).entries(filteredToYear.filter(function(d){return d.Team == d3.select("#teamFilterSelection").property("value");}));
-
-
+                }; }).entries(filteredToYear);
+            return dataAggregation
+        }
+        function getBatScoreColor(batScore)
+        {
+            var batScoreColor;
+            // color is based on standard deviation
+            if (batScore[0].values.BatScore > batScore[0].values.BatScoreAggSd + batScore[0].values.BatScoreAggAvg) {
+                batScoreColor = "#0571b0";
+            }
+            else if (batScore[0].values.BatScore >= batScore[0].values.BatScoreAggAvg) {
+                batScoreColor = "#92c5de";
+            }
+            else if (batScore[0].values.BatScore < batScore[0].values.BatScoreAggSd - batScore[0].values.BatScoreAggAvg) {
+                batScoreColor = "#ca0020";
+            }
+            else if (batScore[0].values.BatScore <= batScore[0].values.BatScoreAggAvg) {
+                batScoreColor = "#f4a582";
+            }
+            return batScoreColor
+        }
+        // aggregating the bat score data by year
+        filteredToYear = cricketdummy.filter(function(d){return d.Year == selectedOption;});
+        var batScore = aggregateData()
+        console.log(batScore);
+        var batScoreColor = getBatScoreColor(batScore)
 
         function drawCricketField() {
             //Position of Field
@@ -235,7 +246,6 @@
 
 
 
-        function scoreAreas() {
             // half circle variables
             var start = -.5 * Math.PI;
             var size = Math.PI;
@@ -255,11 +265,12 @@
             chart.selectAll("path")
                 .data(batScore)
                 .enter().append("svg:path")
-                .style("opacity", function (d) {
-                    return d.BatScore
-                })
-                .style("fill",  "#323c84")
-                .attr("d", arcTop);
+                .style("opacity", ".7")
+                .style("fill", batScoreColor)
+                .attr("id", "arcTop")
+                .attr("d", arcTop)
+                .attr("stroke", batScoreColor)
+                .style("stroke-width", 2);
 
             var arcBottom = d3.svg.arc()
                 .innerRadius(0)
@@ -277,18 +288,12 @@
             chartBottom.selectAll("path")
                 .data(batScore)
                 .enter().append("svg:path")
-                .style("opacity", function (d) {
-                    return d.BatScore
-                })
-                .style("fill",  function(d) {
-                    if (d.BatScore + d.BatScoreSD == 3 ) { return "#415ec5" }
-                    if (d.BatScore == 2 ) { return "#c57a1a" }
-                    else { return "black" }
-                    ; } )
+                .style("opacity", ".7")
+                .style("fill",  batScoreColor )
+                .attr("id", "arcBottom")
                 .attr("d", arcBottom);
 
 
-            console.log(batScore);
             cricketField.append("ellipse")
                 .attr("cx", fieldSVGWidth/centerOfFieldFactor)
                 .attr("cy", fieldSVGHeight/centerOfFieldFactor)
@@ -297,8 +302,20 @@
                 .style("opacity", .01)
                 .attr("fill",  "#323c84");
         }
-        scoreAreas();
-        }
+
+
+
+            d3.select("#yearFilterSelection").on("change", function(d) {
+                var start = -.5 * Math.PI;
+                var size = Math.PI;
+                var startbottom = .5 * Math.PI;
+                var selectedOption = d3.select(this).property("value");
+                filteredToYear = cricketdummy.filter(function(d){return d.Year == selectedOption;});
+                var batScore = aggregateData();
+                var batScoreColor = getBatScoreColor(batScore);
+                // color is based on standard deviation
+                d3.select("#arcTop").attr("stroke", batScoreColor).style("fill",  batScoreColor )
+            });
         drawCricketField();
 
 

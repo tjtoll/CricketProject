@@ -48,7 +48,7 @@
     var pitchHeight = (fieldSVGHeight/5);
     var closeInfieldOffset = 35;
     var closeInfieldLineLength = 75;
-    var selectedOption = 2009;
+    var selectedOption = 2014;
     var cricketField = d3.select("#field").append("svg")
         .attr("width", fieldSVGWidth)
         .attr("height", fieldSVGHeight)
@@ -57,9 +57,7 @@
         }))
         .append('g');
 
-    d3.csv("cricketdummy.csv", function(cricketdummy){
-
-
+    d3.csv("cricket.csv", function(cricketdummy){
 
         // populating the years in the filter drop down
         d3.select("#yearFilterSelection")
@@ -83,19 +81,19 @@
            var dataAggregation = d3.nest()
                 .key(function(d) { return d.Year;})
                 .rollup(function(d) { return {
-                    BatScoreAggAvg: d3.mean(d, function(d) { return d.BatScore; }),
-                    BatScoreAggSd: d3.deviation(d, function(d) { return d.BatScore; }),
-                    BatScore: d3.sum(d, function(d) { if (d.Team  == d3.select("#teamFilterSelection").property("value") ) { return d.BatScore }
+                    BatScoreAggAvg: d3.mean(d, function(d) { return d.StrikeRate; }),
+                    BatScoreAggSd: d3.deviation(d, function(d) { return d.StrikeRate; }),
+                    BatScore: d3.sum(d, function(d) { if (d.Team  == d3.select("#teamFilterSelection").property("value") ) { return d.StrikeRate }
                     else { return 0 }
                         ; }),
-                    BowlScoreAggAvg: d3.mean(d, function(d) { return d.BowlScore; }),
-                    BowlScoreAggSd: d3.deviation(d, function(d) { return d.BowlScore; }),
-                    BowlScore: d3.sum(d, function(d) { if (d.Team  == d3.select("#teamFilterSelection").property("value") ) { return d.BowlScore }
+                    BowlScoreAggAvg: d3.mean(d, function(d) { return d.BowlingEconomy; }),
+                    BowlScoreAggSd: d3.deviation(d, function(d) { return d.BowlingEconomy; }),
+                    BowlScore: d3.sum(d, function(d) { if (d.Team  == d3.select("#teamFilterSelection").property("value") ) { return d.BowlingEconomy }
                     else { return 0 }
                         ; }),
-                    FieldingScoreAggAvg: d3.mean(d, function(d) { return d.FieldingScore; }),
-                    FieldingScoreAggSd: d3.deviation(d, function(d) { return d.FieldingScore; }),
-                    FieldingScore: d3.sum(d, function(d) { if (d.Team  == d3.select("#teamFilterSelection").property("value") ) { return d.FieldingScore }
+                    FieldingScoreAggAvg: d3.mean(d, function(d) { return d.NotOuts; }),
+                    FieldingScoreAggSd: d3.deviation(d, function(d) { return d.NotOuts; }),
+                    FieldingScore: d3.sum(d, function(d) { if (d.Team  == d3.select("#teamFilterSelection").property("value") ) { return d.NotOuts }
                     else { return 0 }
                         ; })
 
@@ -252,18 +250,6 @@
                 .attr("stroke", "#f6f9f9")
                 .style("stroke-width", 1.5);
 
-            var batScoreArea = cricketField.append("circle")
-                .data(batScore)
-                .attr("id","barScoreCircle")
-                .attr("cx", fieldSVGWidth/centerOfFieldFactor )
-                .attr("cy", fieldSVGHeight/centerOfFieldFactor - closeInfieldOffset - 15)
-                .attr("r", function (d) {
-                    return d.BatScore
-                })
-                .attr("fill",  "none")
-                .attr("stroke", "#2025c5")
-                //.style("stroke-dasharray", ("10,3"))
-                .style("stroke-width", 2);
 
             var batScoreAreaLabel = cricketField.append("text")
                 .attr("x", fieldSVGWidth/centerOfFieldFactor)
@@ -316,13 +302,11 @@
                 .outerRadius(43)
                 .startAngle(startbottom)
                 .endAngle(startbottom + size);
-            ;
 
             var chartBottom = cricketField.append("svg")
                 .attr("width", 420)
                 .attr("height", 420).append("svg:g")
-                .attr("transform", "translate(250,336)")
-            ;
+                .attr("transform", "translate(250,336)");
 
             chartBottom.selectAll("path")
                 .data(batScore)
@@ -356,9 +340,19 @@
                 var bowlScoreColor = getBowlScoreColor(batScore);
                 var FieldingScoreColor = getFieldingScoreColor(batScore);
                 d3.select("#arcTop").attr("stroke", batScoreColor).style("fill",  batScoreColor );
-                d3.select("#arcBottom").attr("stroke", bowlScoreColor).style("fill",  bowlScoreColor )
+                d3.select("#arcBottom").attr("stroke", bowlScoreColor).style("fill",  bowlScoreColor );
                 d3.select("#fieldScoreArea").attr("stroke", FieldingScoreColor)
             });
+        d3.select("#teamFilterSelection").on("change", function(d) {
+
+            var batScore = aggregateData();
+            var batScoreColor = getBatScoreColor(batScore);
+            var bowlScoreColor = getBowlScoreColor(batScore);
+            var FieldingScoreColor = getFieldingScoreColor(batScore);
+            d3.select("#arcTop").attr("stroke", batScoreColor).style("fill",  batScoreColor );
+            d3.select("#arcBottom").attr("stroke", bowlScoreColor).style("fill",  bowlScoreColor );
+            d3.select("#fieldScoreArea").attr("stroke", FieldingScoreColor)
+        });
         drawCricketField();
 
 

@@ -17,6 +17,16 @@
     top:10px;
     left:625px;}
 
+#bowlMeasureFilterSelection{
+    position:absolute;
+    top:10px;
+    left:1050px;}
+
+#batMeasureFilterSelection{
+    position:absolute;
+    top:10px;
+    left:850px;}
+
 </style>
 
 
@@ -32,6 +42,8 @@
 
 <select id="yearFilterSelection"></select>
 <select id="teamFilterSelection"></select>
+<select id="bowlMeasureFilterSelection"></select>
+<select id="batMeasureFilterSelection"></select>
 
 <script type="text/javascript">
 
@@ -58,6 +70,27 @@
         .append('g');
 
     d3.csv("cricket.csv", function(cricketdummy){
+
+        d3.csv("cricketBattingMeasures.csv", function(battingMeasures){
+            d3.select("#batMeasureFilterSelection")
+                .selectAll('myOptions')
+                .data(d3.map(battingMeasures, function(d){return d.Measures;}).keys())
+                .enter()
+                .append('option')
+                .text(function(d){return d;})
+                .attr("value",function(d){return d;});
+        });
+
+        d3.csv("cricketBowlingMeasures.csv", function(battingMeasures){
+            d3.select("#bowlMeasureFilterSelection")
+                .selectAll('myOptions')
+                .data(d3.map(battingMeasures, function(d){return d.Measures;}).keys())
+                .enter()
+                .append('option')
+                .text(function(d){return d;})
+                .attr("value",function(d){return d;});
+        });
+
 
         // populating the years in the filter drop down
         d3.select("#yearFilterSelection")

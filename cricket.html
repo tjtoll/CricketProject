@@ -95,6 +95,98 @@ p {
     font-family: sans-serif;
     font-size: 18px;}
 
+#sparkLinesTitle{
+    position:absolute;
+    bottom:360px;
+    left:1070px;
+    font-family: sans-serif;
+    font-size: 18px;}
+
+#leftSpark1{
+    position:absolute;
+    width: 100px;
+    height: 75px;
+    bottom:285px;
+    right:350px;}
+
+#leftSpark2{
+    position:absolute;
+    width: 100px;
+    height: 75px;
+    bottom:215px;
+    right:350px;}
+
+#leftSpark3{
+    position:absolute;
+    width: 100px;
+    height: 75px;
+    bottom:145px;
+    right:350px;}
+
+#leftSpark4{
+    position:absolute;
+    width: 100px;
+    height: 75px;
+    bottom:75px;
+    right:350px;}
+
+#middleSpark1{
+    position:absolute;
+    width: 100px;
+    height: 75px;
+    bottom:285px;
+    right:200px;}
+
+#middleSpark2{
+    position:absolute;
+    width: 100px;
+    height: 75px;
+    bottom:215px;
+    right:200px;}
+
+#middleSpark3{
+    position:absolute;
+    width: 100px;
+    height: 75px;
+    bottom:145px;
+    right:200px;}
+
+#middleSpark4{
+    position:absolute;
+    width: 100px;
+    height: 75px;
+    bottom:75px;
+    right:200px;}
+
+
+#rightSpark1{
+    position:absolute;
+    width: 100px;
+    height: 75px;
+    bottom:285px;
+    right:50px;}
+
+#rightSpark2{
+    position:absolute;
+    width: 100px;
+    height: 75px;
+    bottom:215px;
+    right:50px;}
+
+#rightSpark3{
+    position:absolute;
+    width: 100px;
+    height: 75px;
+    bottom:145px;
+    right:50px;}
+
+#rightSpark4{
+    position:absolute;
+    width: 100px;
+    height: 75px;
+    bottom:75px;
+    right:50px;}
+
 </style>
 
 <div id="content">
@@ -115,15 +207,33 @@ p {
 </div>
 
 <div id="yearFilterTitle">
-    <div>Year</div>
+    <div>Season</div>
 </div>
 
 <div id="batMeasureFilterTitle">
     <div>Batting Measure</div>
 </div>
 
+<div class="container" id="leftSpark1"></div>
+<div class="container" id="leftSpark2"></div>
+<div class="container" id="leftSpark3"></div>
+<div class="container" id="leftSpark4"></div>
+<div class="container" id="middleSpark1"></div>
+<div class="container" id="middleSpark2"></div>
+<div class="container" id="middleSpark3"></div>
+<div class="container" id="middleSpark4"></div>
+<div class="container" id="rightSpark1"></div>
+<div class="container" id="rightSpark2"></div>
+<div class="container" id="rightSpark3"></div>
+<div class="container" id="rightSpark4"></div>
+
+
 <div id="scatterPlotTitle">
-    <div>Matches Won vs. Selected Measures by Year</div>
+    <div>Matches Won vs. Selected Measures by Season</div>
+</div>
+
+<div id="sparkLinesTitle">
+    <div>Measure Spark Lines by Season</div>
 </div>
 
 <div id="bowlMeasureFilterTitle">
@@ -600,17 +710,6 @@ p {
                 .attr("id", "arcBottom")
                 .attr("d", arcBottom);
 
-            // var fieldScoreColor = getFieldingScoreColor(batScore);
-            // cricketField.append("ellipse")
-            //     .attr("id","fieldScoreArea")
-            //     .attr("cx", fieldSVGWidth/centerOfFieldFactor)
-            //     .attr("cy", fieldSVGHeight/centerOfFieldFactor)
-            //     .attr("rx", fieldSVGWidth/2.5)
-            //     .attr("ry", (fieldSVGHeight/2.5)/outfieldShapeFactor )
-            //     .style("opacity", scoreAreaOpacity)
-            //     .attr("stroke", fieldScoreColor)
-            //     .style("stroke-width", 65)
-            //     .attr("fill", "none" );
 
         }
 
@@ -697,6 +796,21 @@ p {
             d3.select("#batScoreAreaLabelSd").transition().duration(500).text("League Std Dev: "+(batScore[0].values.BatScoreAggSd).toFixed(2));
             d3.select("#ScatterPlotSVG").remove();
             drawScatterPlot()
+
+            d3.selectAll("#Sparkline").remove();
+
+             leftSpark("#leftSpark1","BowlingEconomy")
+             leftSpark("#leftSpark2","WicketsPerOver")
+             leftSpark("#leftSpark3","TotalWickets")
+             leftSpark("#leftSpark4","WicketsPerMatch")
+             leftSpark("#middleSpark1","AverageOfRunsScored")
+             leftSpark("#middleSpark2","BallsFaced")
+             leftSpark("#middleSpark3","StrikeRate")
+             leftSpark("#middleSpark4","NotOuts")
+             leftSpark("#rightSpark1","100s")
+             leftSpark("#rightSpark2","50s")
+             leftSpark("#rightSpark3","4s")
+             leftSpark("#rightSpark4","6s")
 
         });
         drawCricketField();
@@ -825,7 +939,163 @@ p {
         }
         drawScatterPlot()
         drawMapLegend()
+
+        function leftSpark(divElement,sparkMeasure) {
+
+            filteredToMeasure = cricketdummy.filter(function(d){return d.MeasureName == sparkMeasure;});
+            var dataAggregation = d3.nest()
+                .key(function(d) { return d.Year;})
+                .rollup(function(d) { return {
+                    BatScoreAggAvg: d3.mean(d, function(d) { return d.MeasureValue}),
+                    BatScoreAggSd: d3.deviation(d, function(d) { return d.MeasureValue}),
+                    BatScore: d3.sum(d, function(d) { if (d.Team  == d3.select("#teamFilterSelection").property("value") ) { return d.MeasureValue }
+                    else { return 0 }
+                        ; })
+                }; }).entries(filteredToMeasure);
+
+            var margin = {top: 20, right: 5, bottom: 70, left: 5},
+                width = 125,
+                height = 50 ;
+
+            filteredToMeasure.forEach(function (d) {
+                d.Year = d.Year;
+                d.MeasureValue = +d.MeasureValue;
+            });
+
+            var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
+
+            var y = d3.scale.linear().range([height, 0]);
+            var xAxis = d3.svg.axis()
+                .scale(x)
+                .orient("bottom")
+            var yAxis = d3.svg.axis()
+                .scale(y)
+                .orient("left")
+                .ticks(10);
+
+            var svg = d3.select(divElement).append("svg")
+                .attr("id","Sparkline")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+
+            x.domain(dataAggregation.map(function (d) {
+                return d.key;
+            }));
+            y.domain([0, d3.max(dataAggregation, function (d) {
+                return d.values.BatScore;
+            })]);
+
+            svg.selectAll("bar")
+                .data(dataAggregation)
+                .enter().append("rect")
+                 .style("fill", function (d) {
+                     if (d.values.BatScore > d.values.BatScoreAggSd + d.values.BatScoreAggAvg) {
+                         return  "#0571b0";
+                     }
+                     else if (d.values.BatScore >= d.values.BatScoreAggAvg) {
+                         return "#92c5de";
+                     }
+                     else if (d.values.BatScore < d.values.BatScoreAggSd - d.values.BatScoreAggAvg) {
+                         return "#ca0020";
+                     }
+                     else if (d.values.BatScore <= d.values.BatScoreAggAvg) {
+                         return "#f4a582";
+                     }
+                 })
+                .attr("x", function (d) {
+                    return x(d.key);
+                })
+                .attr("width", x.rangeBand() * .9)
+                .attr("y", function (d) {
+                    return y(d.values.BatScore);
+                })
+                .attr("height", function (d) {
+                    return height - y(d.values.BatScore);
+                })
+                .on("mouseover", function(d) {
+                    d3.select(this)
+                        .transition()
+                        .duration(250)
+                        .style("fill","orange")
+
+                    d3.select('#yearFilterSelection').property('value', d.key);
+                    var yearSelection = d.key
+                    console.log(yearSelection)
+
+                    d3.csv("cricketPivot.csv", function(cricketdummy){
+
+                        filteredToYear  = cricketdummy.filter(function(d){return d.Year == yearSelection;});
+                        var batScore = aggregateData();
+                        var batScoreColor = getBatScoreColor(batScore);
+                        var bowlScoreColor = getBowlScoreColor(batScore);
+                        var FieldingScoreColor = getFieldingScoreColor(batScore);
+                        d3.select("#arcTop").transition().duration(500).attr("stroke", batScoreColor).style("fill",  batScoreColor );
+                        d3.select("#arcBottom").transition().duration(500).attr("stroke", bowlScoreColor).style("fill",  bowlScoreColor );
+                        d3.select("#fieldScoreArea").transition().duration(500).attr("stroke", FieldingScoreColor)
+
+                        d3.select("#bowlScoreAreaLabelMeasure").transition().duration(500).text(d3.select("#bowlMeasureFilterSelection").property("value")+": "+(batScore[0].values.BowlScore).toFixed(2));
+                        d3.select("#bowlScoreAreaLabelAvg").transition().duration(500).text("League Avg: "+(batScore[0].values.BowlScoreAggAvg).toFixed(2));
+                        d3.select("#bowlScoreAreaLabelSd").transition().duration(500).text("League Std Dev: "+(batScore[0].values.BowlScoreAggSd).toFixed(2));
+                        d3.select("#batScoreAreaLabelMeasure").transition().duration(500).text(d3.select("#batMeasureFilterSelection").property("value")+": "+(batScore[0].values.BatScore).toFixed(2));
+                        d3.select("#batScoreAreaLabelAvg").transition().duration(500).text("League Avg: "+(batScore[0].values.BatScoreAggAvg).toFixed(2));
+                        d3.select("#batScoreAreaLabelSd").transition().duration(500).text("League Std Dev: "+(batScore[0].values.BatScoreAggSd).toFixed(2));
+                    })
+                })
+                .on("mouseout", function(d) {
+                    d3.select(this)
+                        .transition()
+                        .duration(500)
+                        .style("fill", function (d) {
+                            if (d.values.BatScore > d.values.BatScoreAggSd + d.values.BatScoreAggAvg) {
+                                return  "#0571b0";
+                            }
+                            else if (d.values.BatScore >= d.values.BatScoreAggAvg) {
+                                return "#92c5de";
+                            }
+                            else if (d.values.BatScore < d.values.BatScoreAggSd - d.values.BatScoreAggAvg) {
+                                return "#ca0020";
+                            }
+                            else if (d.values.BatScore <= d.values.BatScoreAggAvg) {
+                                return "#f4a582";
+                            }
+                        })
+                })
+
+            svg.append("g")
+                .attr("class", "y axis")
+                .call(yAxis)
+                .append("text")
+                .attr("transform", "rotate(0)")
+                .attr("y", 6)
+                .attr("dy", "-.55em")
+                .style("text-anchor", "start")
+                .style("font-size", "12")
+                .text(sparkMeasure);
+        }
+        leftSpark("#leftSpark1","BowlingEconomy")
+        leftSpark("#leftSpark2","WicketsPerOver")
+        leftSpark("#leftSpark3","TotalWickets")
+        leftSpark("#leftSpark4","WicketsPerMatch")
+        leftSpark("#middleSpark1","AverageOfRunsScored")
+        leftSpark("#middleSpark2","BallsFaced")
+        leftSpark("#middleSpark3","StrikeRate")
+        leftSpark("#middleSpark4","NotOuts")
+        leftSpark("#rightSpark1","100s")
+        leftSpark("#rightSpark2","50s")
+        leftSpark("#rightSpark3","4s")
+        leftSpark("#rightSpark4","6s")
+
+
+
     });
+
+
+
+
 
 
 

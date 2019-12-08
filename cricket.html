@@ -799,18 +799,18 @@ p {
 
             d3.selectAll("#Sparkline").remove();
 
-             leftSpark("#leftSpark1","BowlingEconomy")
-             leftSpark("#leftSpark2","WicketsPerOver")
-             leftSpark("#leftSpark3","TotalWickets")
-             leftSpark("#leftSpark4","WicketsPerMatch")
-             leftSpark("#middleSpark1","AverageOfRunsScored")
-             leftSpark("#middleSpark2","BallsFaced")
-             leftSpark("#middleSpark3","StrikeRate")
-             leftSpark("#middleSpark4","NotOuts")
-             leftSpark("#rightSpark1","100s")
-             leftSpark("#rightSpark2","50s")
-             leftSpark("#rightSpark3","4s")
-             leftSpark("#rightSpark4","6s")
+            leftSpark("#leftSpark1","BowlingEconomy","bowl")
+            leftSpark("#leftSpark2","WicketsPerOver","bowl")
+            leftSpark("#leftSpark3","TotalWickets","bowl")
+            leftSpark("#leftSpark4","WicketsPerMatch","bowl")
+            leftSpark("#middleSpark1","AverageOfRunsScored","bat")
+            leftSpark("#middleSpark2","BallsFaced","bat")
+            leftSpark("#middleSpark3","StrikeRate","bat")
+            leftSpark("#middleSpark4","NotOuts","bat")
+            leftSpark("#rightSpark1","100s","bat")
+            leftSpark("#rightSpark2","50s","bat")
+            leftSpark("#rightSpark3","4s","bat")
+            leftSpark("#rightSpark4","6s","bat")
 
         });
         drawCricketField();
@@ -940,7 +940,7 @@ p {
         drawScatterPlot()
         drawMapLegend()
 
-        function leftSpark(divElement,sparkMeasure) {
+        function leftSpark(divElement,sparkMeasure,measureType) {
 
             filteredToMeasure = cricketdummy.filter(function(d){return d.MeasureName == sparkMeasure;});
             var dataAggregation = d3.nest()
@@ -1026,6 +1026,8 @@ p {
                     var yearSelection = d.key
                     console.log(yearSelection)
 
+                    if (measureType == "bat") {d3.select('#batMeasureFilterSelection').property('value', sparkMeasure);}
+                    if (measureType == "bowl") {d3.select('#bowlMeasureFilterSelection').property('value', sparkMeasure);}
                     d3.csv("cricketPivot.csv", function(cricketdummy){
 
                         filteredToYear  = cricketdummy.filter(function(d){return d.Year == yearSelection;});
@@ -1076,18 +1078,18 @@ p {
                 .style("font-size", "12")
                 .text(sparkMeasure);
         }
-        leftSpark("#leftSpark1","BowlingEconomy")
-        leftSpark("#leftSpark2","WicketsPerOver")
-        leftSpark("#leftSpark3","TotalWickets")
-        leftSpark("#leftSpark4","WicketsPerMatch")
-        leftSpark("#middleSpark1","AverageOfRunsScored")
-        leftSpark("#middleSpark2","BallsFaced")
-        leftSpark("#middleSpark3","StrikeRate")
-        leftSpark("#middleSpark4","NotOuts")
-        leftSpark("#rightSpark1","100s")
-        leftSpark("#rightSpark2","50s")
-        leftSpark("#rightSpark3","4s")
-        leftSpark("#rightSpark4","6s")
+        leftSpark("#leftSpark1","BowlingEconomy","bowl")
+        leftSpark("#leftSpark2","WicketsPerOver","bowl")
+        leftSpark("#leftSpark3","TotalWickets","bowl")
+        leftSpark("#leftSpark4","WicketsPerMatch","bowl")
+        leftSpark("#middleSpark1","AverageOfRunsScored","bat")
+        leftSpark("#middleSpark2","BallsFaced","bat")
+        leftSpark("#middleSpark3","StrikeRate","bat")
+        leftSpark("#middleSpark4","NotOuts","bat")
+        leftSpark("#rightSpark1","100s","bat")
+        leftSpark("#rightSpark2","50s","bat")
+        leftSpark("#rightSpark3","4s","bat")
+        leftSpark("#rightSpark4","6s","bat")
 
 
 

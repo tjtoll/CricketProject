@@ -9,13 +9,46 @@
 
 #yearFilterSelection{
     position:absolute;
-    top:65px;
-    left:550px;}
+    bottom:70px;
+    left:150px;}
+
+#batMeasureFilterSelection{
+    position:absolute;
+    bottom:70px;
+    left:210px;}
+
+#bowlMeasureFilterSelection{
+    position:absolute;
+    bottom:70px;
+    left:380px;}
+
+#yearFilterTitle{
+    position:absolute;
+    bottom:90px;
+    left:150px;
+    font-family: sans-serif;
+    font-size: 12px;}
+
+#batMeasureFilterTitle{
+    position:absolute;
+    bottom:90px;
+    left:210px;
+    font-family: sans-serif;
+    font-size: 12px;}
+
+#bowlMeasureFilterTitle{
+    position:absolute;
+    bottom:90px;
+    left:380px;
+    font-family: sans-serif;
+    font-size: 12px;}
 
 #teamFilterSelection{
     position:absolute;
     top:65px;
-    left:625px;}
+    left:625px;
+}
+
 p {
     text-align:center;
     font-family: sans-serif;
@@ -27,20 +60,24 @@ p {
     top: 0px;
     right: 0px;
 }
-#bowlMeasureFilterSelection{
+
+
+#area5{
+    position:absolute;
+    bottom:30px;
+    left:5px;}
+
+
+
+#scatterMeasureFilterSelection{
     position:absolute;
     top:65px;
-    left:1050px;}
-
-#batMeasureFilterSelection{
-                    position:absolute;
-                    top:65px;
-                    left:850px;}
+    left:1200px;}
 
 #scatterPlot{
     position:absolute;
     top:300px;
-    left:550px;}
+    left:650px;}
 
 </style>
 
@@ -58,6 +95,21 @@ p {
 
 <div class="container" id="batArea">
 </div>
+<div class="container" id="area5">
+</div>
+
+<div id="yearFilterTitle">
+    <div>Year</div>
+</div>
+
+<div id="batMeasureFilterTitle">
+    <div>Batting Measure</div>
+</div>
+
+<div id="bowlMeasureFilterTitle">
+    <div>Bowling Measure</div>
+</div>
+
 <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 
@@ -65,6 +117,8 @@ p {
 <select id="teamFilterSelection"></select>
 <select id="bowlMeasureFilterSelection"></select>
 <select id="batMeasureFilterSelection"></select>
+<select id="scatterMeasureFilterSelection"></select>
+
 
 <script type="text/javascript">
 
@@ -89,6 +143,62 @@ p {
             cricketField.attr("transform", "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")")
         }))
         .append('g');
+    var svgMapLegend = d3.select("#area5").append("svg")
+        .attr("width", 150)
+        .attr("height", 125)
+        .append('g');
+
+    function drawMapLegend() {
+        d3.csv("legend.csv", function (mapLegend) {
+
+            svgMapLegend.selectAll("legends")
+                .data(mapLegend)
+                .enter()
+                .append("circle")
+                .attr("cy", function (d, i) {
+                    return (d.a * 25)
+                        ;
+                })
+                .attr("cx", 15)
+                .attr("r", 6)
+                .attr("fill", function (d, i) {
+                    if (d.a == 1) {
+                        return "#0571b0"
+                    }
+                    if (d.a == 2) {
+                        return "#92c5de"
+                    }
+                    if (d.a == 3) {
+                        return "#ca0020"
+                    }
+                    if (d.a == 4) {
+                        return "#f4a582"
+                    }
+                    ;
+                });
+
+            svgMapLegend.selectAll("legends")
+                .data(mapLegend)
+                .enter()
+                .append("text")
+                .attr("y", function (d, i) {
+                    return (d.a * 25) + 5
+                        ;
+                })
+                .attr("x", 25)
+                .style("font-size", "12px")
+                .style("fill", "black")
+                .style("font-family", "sans-serif")
+                .text(function (d) {
+                    return d.b
+                });
+
+
+        });
+    }
+
+
+
 
     d3.csv("cricketPivot.csv", function(cricketdummy){
 
@@ -111,6 +221,14 @@ p {
                 .append('option')
                 .text(function(d){return d;})
                 .attr("value",function(d){return d;});
+
+        d3.select("#scatterMeasureFilterSelection")
+            .selectAll('myOptions')
+            .data(d3.map(cricketdummy, function(d){ return d.MeasureName }).keys())
+            .enter()
+            .append('option')
+            .text(function(d){return d;})
+            .attr("value",function(d){return d;});
 
 
         // populating the years in the filter drop down
@@ -169,7 +287,7 @@ p {
             var dataAggregation = d3.nest()
                 .key(function(d) { return d.Year;})
                 .rollup(function(d) { return {
-                    MatchesWon: d3.sum(d, function(d) { if (d.MeasureName  == "Matches" ) { return d.MeasureValue }
+                    MatchesWon: d3.sum(d, function(d) { if (d.MeasureName  == "MatchesWon" ) { return d.MeasureValue }
                     else { return 0 }
                         ; }),
                     ScatterMeasure: d3.sum(d, function(d) { if (d.MeasureName  == "AverageOfRunsScored" ) { return d.MeasureValue }
@@ -245,7 +363,7 @@ p {
             //Position of Field
             var d = document.getElementById('field');
             d.style.position = "absolute";
-            d.style.left = 25+'px';
+            d.style.left = 15+'px';
             d.style.top = 25+'px';
             //Field size variables
 
@@ -350,6 +468,7 @@ p {
 
 
             var bowlScoreAreaLabelMeasure = cricketField.append("text")
+                .attr("id","bowlScoreAreaLabelMeasure")
                 .attr("x", fieldSVGWidth/centerOfFieldFactor)
                 .attr("y", fieldSVGHeight/centerOfFieldFactor + closeInfieldOffset + 90)
                 .attr("text-anchor", "middle")
@@ -359,6 +478,7 @@ p {
                 .text(d3.select("#bowlMeasureFilterSelection").property("value")+": "+(batScore[0].values.BowlScore).toFixed(2));
 
             var bowlScoreAreaLabelAvg = cricketField.append("text")
+                .attr("id","bowlScoreAreaLabelAvg")
                 .attr("x", fieldSVGWidth/centerOfFieldFactor)
                 .attr("y", fieldSVGHeight/centerOfFieldFactor + closeInfieldOffset + 105)
                 .attr("text-anchor", "middle")
@@ -368,6 +488,7 @@ p {
                 .text("League Avg: "+(batScore[0].values.BowlScoreAggAvg).toFixed(2));
 
             var bowlScoreAreaLabelSd = cricketField.append("text")
+                .attr("id","bowlScoreAreaLabelSd")
                 .attr("x", fieldSVGWidth/centerOfFieldFactor)
                 .attr("y", fieldSVGHeight/centerOfFieldFactor + closeInfieldOffset + 120)
                 .attr("text-anchor", "middle")
@@ -377,6 +498,7 @@ p {
                 .text("League Std Dev: "+(batScore[0].values.BowlScoreAggSd).toFixed(2));
 
             var batScoreAreaLabelMeasure = cricketField.append("text")
+                .attr("id","batScoreAreaLabelMeasure")
                 .attr("x", fieldSVGWidth/centerOfFieldFactor)
                 .attr("y", fieldSVGHeight/centerOfFieldFactor + closeInfieldOffset - 185)
                 .attr("text-anchor", "middle")
@@ -386,6 +508,7 @@ p {
                 .text(d3.select("#batMeasureFilterSelection").property("value")+": "+(batScore[0].values.BatScore).toFixed(2));
 
             var batScoreAreaLabelAvg = cricketField.append("text")
+                .attr("id","batScoreAreaLabelAvg")
                 .attr("x", fieldSVGWidth/centerOfFieldFactor)
                 .attr("y", fieldSVGHeight/centerOfFieldFactor + closeInfieldOffset - 170)
                 .attr("text-anchor", "middle")
@@ -395,6 +518,7 @@ p {
                 .text("League Avg: "+(batScore[0].values.BatScoreAggAvg).toFixed(2));
 
             var batScoreAreaLabelSd = cricketField.append("text")
+                .attr("id","batScoreAreaLabelSd")
                 .attr("x", fieldSVGWidth/centerOfFieldFactor)
                 .attr("y", fieldSVGHeight/centerOfFieldFactor + closeInfieldOffset - 155)
                 .attr("text-anchor", "middle")
@@ -464,6 +588,17 @@ p {
 
         }
 
+        function updateStats() {
+            d3.select("#bowlScoreAreaLabelMeasure").text(d3.select("#bowlMeasureFilterSelection").property("value")+": "+(batScore[0].values.BowlScore).toFixed(2));
+            d3.select("#bowlScoreAreaLabelAvg").text("League Avg: "+(batScore[0].values.BowlScoreAggAvg).toFixed(2));
+            d3.select("#bowlScoreAreaLabelSd").text("League Std Dev: "+(batScore[0].values.BowlScoreAggSd).toFixed(2));
+            d3.select("#batScoreAreaLabelMeasure").text(d3.select("#batMeasureFilterSelection").property("value")+": "+(batScore[0].values.BatScore).toFixed(2));
+            d3.select("#batScoreAreaLabelAvg").text("League Avg: "+(batScore[0].values.BatScoreAggAvg).toFixed(2));
+            d3.select("#batScoreAreaLabelSd").text("League Std Dev: "+(batScore[0].values.BatScoreAggSd).toFixed(2));
+
+        }
+
+
         d3.select("#yearFilterSelection").on("change", function(d) {
 
             var selectedOption = d3.select(this).property("value");
@@ -475,6 +610,13 @@ p {
             d3.select("#arcTop").attr("stroke", batScoreColor).style("fill",  batScoreColor );
             d3.select("#arcBottom").attr("stroke", bowlScoreColor).style("fill",  bowlScoreColor );
             d3.select("#fieldScoreArea").attr("stroke", FieldingScoreColor)
+
+            d3.select("#bowlScoreAreaLabelMeasure").text(d3.select("#bowlMeasureFilterSelection").property("value")+": "+(batScore[0].values.BowlScore).toFixed(2));
+            d3.select("#bowlScoreAreaLabelAvg").text("League Avg: "+(batScore[0].values.BowlScoreAggAvg).toFixed(2));
+            d3.select("#bowlScoreAreaLabelSd").text("League Std Dev: "+(batScore[0].values.BowlScoreAggSd).toFixed(2));
+            d3.select("#batScoreAreaLabelMeasure").text(d3.select("#batMeasureFilterSelection").property("value")+": "+(batScore[0].values.BatScore).toFixed(2));
+            d3.select("#batScoreAreaLabelAvg").text("League Avg: "+(batScore[0].values.BatScoreAggAvg).toFixed(2));
+            d3.select("#batScoreAreaLabelSd").text("League Std Dev: "+(batScore[0].values.BatScoreAggSd).toFixed(2));
         });
         d3.select("#batMeasureFilterSelection").on("change", function(d) {
 
@@ -485,6 +627,13 @@ p {
             d3.select("#arcTop").attr("stroke", batScoreColor).style("fill",  batScoreColor );
             d3.select("#arcBottom").attr("stroke", bowlScoreColor).style("fill",  bowlScoreColor );
             d3.select("#fieldScoreArea").attr("stroke", FieldingScoreColor)
+
+            d3.select("#bowlScoreAreaLabelMeasure").text(d3.select("#bowlMeasureFilterSelection").property("value")+": "+(batScore[0].values.BowlScore).toFixed(2));
+            d3.select("#bowlScoreAreaLabelAvg").text("League Avg: "+(batScore[0].values.BowlScoreAggAvg).toFixed(2));
+            d3.select("#bowlScoreAreaLabelSd").text("League Std Dev: "+(batScore[0].values.BowlScoreAggSd).toFixed(2));
+            d3.select("#batScoreAreaLabelMeasure").text(d3.select("#batMeasureFilterSelection").property("value")+": "+(batScore[0].values.BatScore).toFixed(2));
+            d3.select("#batScoreAreaLabelAvg").text("League Avg: "+(batScore[0].values.BatScoreAggAvg).toFixed(2));
+            d3.select("#batScoreAreaLabelSd").text("League Std Dev: "+(batScore[0].values.BatScoreAggSd).toFixed(2));
         });
         d3.select("#bowlMeasureFilterSelection").on("change", function(d) {
 
@@ -495,6 +644,13 @@ p {
             d3.select("#arcTop").attr("stroke", batScoreColor).style("fill",  batScoreColor );
             d3.select("#arcBottom").attr("stroke", bowlScoreColor).style("fill",  bowlScoreColor );
             d3.select("#fieldScoreArea").attr("stroke", FieldingScoreColor)
+
+            d3.select("#bowlScoreAreaLabelMeasure").text(d3.select("#bowlMeasureFilterSelection").property("value")+": "+(batScore[0].values.BowlScore).toFixed(2));
+            d3.select("#bowlScoreAreaLabelAvg").text("League Avg: "+(batScore[0].values.BowlScoreAggAvg).toFixed(2));
+            d3.select("#bowlScoreAreaLabelSd").text("League Std Dev: "+(batScore[0].values.BowlScoreAggSd).toFixed(2));
+            d3.select("#batScoreAreaLabelMeasure").text(d3.select("#batMeasureFilterSelection").property("value")+": "+(batScore[0].values.BatScore).toFixed(2));
+            d3.select("#batScoreAreaLabelAvg").text("League Avg: "+(batScore[0].values.BatScoreAggAvg).toFixed(2));
+            d3.select("#batScoreAreaLabelSd").text("League Std Dev: "+(batScore[0].values.BatScoreAggSd).toFixed(2));
         });
         d3.select("#teamFilterSelection").on("change", function(d) {
 
@@ -507,7 +663,12 @@ p {
             d3.select("#arcBottom").attr("stroke", bowlScoreColor).style("fill",  bowlScoreColor );
             d3.select("#fieldScoreArea").attr("stroke", FieldingScoreColor)
 
-
+            d3.select("#bowlScoreAreaLabelMeasure").text(d3.select("#bowlMeasureFilterSelection").property("value")+": "+(batScore[0].values.BowlScore).toFixed(2));
+            d3.select("#bowlScoreAreaLabelAvg").text("League Avg: "+(batScore[0].values.BowlScoreAggAvg).toFixed(2));
+            d3.select("#bowlScoreAreaLabelSd").text("League Std Dev: "+(batScore[0].values.BowlScoreAggSd).toFixed(2));
+            d3.select("#batScoreAreaLabelMeasure").text(d3.select("#batMeasureFilterSelection").property("value")+": "+(batScore[0].values.BatScore).toFixed(2));
+            d3.select("#batScoreAreaLabelAvg").text("League Avg: "+(batScore[0].values.BatScoreAggAvg).toFixed(2));
+            d3.select("#batScoreAreaLabelSd").text("League Std Dev: "+(batScore[0].values.BatScoreAggSd).toFixed(2));
             d3.select("#ScatterPlotSVG").remove();
             drawScatterPlot()
 
@@ -534,8 +695,6 @@ p {
                 yScale = d3.scale.linear().range([height, 0]),
                 yMap = function(d) { return yScale(yValue(d));},
                 yAxis = d3.svg.axis().scale(yScale).orient("left");
-
-
 
 // setup fill color
             var cValue = function(d) { return d.Team;},
@@ -612,14 +771,15 @@ p {
                         .attr('stroke-width',1)
                 })
                 .append('title') // Tooltip
-                .text(function (d) { return d.Team +
+                .text(function (d) { return d.key +
                     '\nMatches Won: ' + d.values.MatchesWon +
                     '\nWickets Per Match: ' + d.BowlingEconomy +
-                    '\nAvg Runs Scored: ' + d.AverageOfRunsScored})
+                    '\nAvg Runs Scored: ' + d.values.ScatterMeasure})
 
 
         }
         drawScatterPlot()
+        drawMapLegend()
     });
 
 

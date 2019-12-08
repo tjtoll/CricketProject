@@ -80,8 +80,8 @@ p {
 
 #scatterMeasureFilterSelection{
     position:absolute;
-    top:65px;
-    left:1200px;}
+    bottom:325px;
+    left:850px;}
 
 #scatterPlot{
     position:absolute;
@@ -615,12 +615,12 @@ p {
         }
 
         function updateStats() {
-            d3.select("#bowlScoreAreaLabelMeasure").text(d3.select("#bowlMeasureFilterSelection").property("value")+": "+(batScore[0].values.BowlScore).toFixed(2));
-            d3.select("#bowlScoreAreaLabelAvg").text("League Avg: "+(batScore[0].values.BowlScoreAggAvg).toFixed(2));
-            d3.select("#bowlScoreAreaLabelSd").text("League Std Dev: "+(batScore[0].values.BowlScoreAggSd).toFixed(2));
-            d3.select("#batScoreAreaLabelMeasure").text(d3.select("#batMeasureFilterSelection").property("value")+": "+(batScore[0].values.BatScore).toFixed(2));
-            d3.select("#batScoreAreaLabelAvg").text("League Avg: "+(batScore[0].values.BatScoreAggAvg).toFixed(2));
-            d3.select("#batScoreAreaLabelSd").text("League Std Dev: "+(batScore[0].values.BatScoreAggSd).toFixed(2));
+            d3.select("#bowlScoreAreaLabelMeasure").transition().duration(500).text(d3.select("#bowlMeasureFilterSelection").property("value")+": "+(batScore[0].values.BowlScore).toFixed(2));
+            d3.select("#bowlScoreAreaLabelAvg").transition().duration(500).text("League Avg: "+(batScore[0].values.BowlScoreAggAvg).toFixed(2));
+            d3.select("#bowlScoreAreaLabelSd").transition().duration(500).text("League Std Dev: "+(batScore[0].values.BowlScoreAggSd).toFixed(2));
+            d3.select("#batScoreAreaLabelMeasure").transition().duration(500).text(d3.select("#batMeasureFilterSelection").property("value")+": "+(batScore[0].values.BatScore).toFixed(2));
+            d3.select("#batScoreAreaLabelAvg").transition().duration(500).text("League Avg: "+(batScore[0].values.BatScoreAggAvg).toFixed(2));
+            d3.select("#batScoreAreaLabelSd").transition().duration(500).text("League Std Dev: "+(batScore[0].values.BatScoreAggSd).toFixed(2));
 
         }
 
@@ -633,16 +633,16 @@ p {
             var batScoreColor = getBatScoreColor(batScore);
             var bowlScoreColor = getBowlScoreColor(batScore);
             var FieldingScoreColor = getFieldingScoreColor(batScore);
-            d3.select("#arcTop").attr("stroke", batScoreColor).style("fill",  batScoreColor );
-            d3.select("#arcBottom").attr("stroke", bowlScoreColor).style("fill",  bowlScoreColor );
-            d3.select("#fieldScoreArea").attr("stroke", FieldingScoreColor)
+            d3.select("#arcTop").transition().duration(500).attr("stroke", batScoreColor).style("fill",  batScoreColor );
+            d3.select("#arcBottom").transition().duration(500).attr("stroke", bowlScoreColor).style("fill",  bowlScoreColor );
+            d3.select("#fieldScoreArea").transition().duration(500).attr("stroke", FieldingScoreColor)
 
-            d3.select("#bowlScoreAreaLabelMeasure").text(d3.select("#bowlMeasureFilterSelection").property("value")+": "+(batScore[0].values.BowlScore).toFixed(2));
-            d3.select("#bowlScoreAreaLabelAvg").text("League Avg: "+(batScore[0].values.BowlScoreAggAvg).toFixed(2));
-            d3.select("#bowlScoreAreaLabelSd").text("League Std Dev: "+(batScore[0].values.BowlScoreAggSd).toFixed(2));
-            d3.select("#batScoreAreaLabelMeasure").text(d3.select("#batMeasureFilterSelection").property("value")+": "+(batScore[0].values.BatScore).toFixed(2));
-            d3.select("#batScoreAreaLabelAvg").text("League Avg: "+(batScore[0].values.BatScoreAggAvg).toFixed(2));
-            d3.select("#batScoreAreaLabelSd").text("League Std Dev: "+(batScore[0].values.BatScoreAggSd).toFixed(2));
+            d3.select("#bowlScoreAreaLabelMeasure").transition().duration(500).text(d3.select("#bowlMeasureFilterSelection").property("value")+": "+(batScore[0].values.BowlScore).toFixed(2));
+            d3.select("#bowlScoreAreaLabelAvg").transition().duration(500).text("League Avg: "+(batScore[0].values.BowlScoreAggAvg).toFixed(2));
+            d3.select("#bowlScoreAreaLabelSd").transition().duration(500).text("League Std Dev: "+(batScore[0].values.BowlScoreAggSd).toFixed(2));
+            d3.select("#batScoreAreaLabelMeasure").transition().duration(500).text(d3.select("#batMeasureFilterSelection").property("value")+": "+(batScore[0].values.BatScore).toFixed(2));
+            d3.select("#batScoreAreaLabelAvg").transition().duration(500).text("League Avg: "+(batScore[0].values.BatScoreAggAvg).toFixed(2));
+            d3.select("#batScoreAreaLabelSd").transition().duration(500).text("League Std Dev: "+(batScore[0].values.BatScoreAggSd).toFixed(2));
         });
         d3.select("#batMeasureFilterSelection").on("change", function(d) {
 
@@ -654,12 +654,12 @@ p {
             d3.select("#arcBottom").attr("stroke", bowlScoreColor).style("fill",  bowlScoreColor );
             d3.select("#fieldScoreArea").attr("stroke", FieldingScoreColor)
 
-            d3.select("#bowlScoreAreaLabelMeasure").text(d3.select("#bowlMeasureFilterSelection").property("value")+": "+(batScore[0].values.BowlScore).toFixed(2));
-            d3.select("#bowlScoreAreaLabelAvg").text("League Avg: "+(batScore[0].values.BowlScoreAggAvg).toFixed(2));
-            d3.select("#bowlScoreAreaLabelSd").text("League Std Dev: "+(batScore[0].values.BowlScoreAggSd).toFixed(2));
-            d3.select("#batScoreAreaLabelMeasure").text(d3.select("#batMeasureFilterSelection").property("value")+": "+(batScore[0].values.BatScore).toFixed(2));
-            d3.select("#batScoreAreaLabelAvg").text("League Avg: "+(batScore[0].values.BatScoreAggAvg).toFixed(2));
-            d3.select("#batScoreAreaLabelSd").text("League Std Dev: "+(batScore[0].values.BatScoreAggSd).toFixed(2));
+            d3.select("#bowlScoreAreaLabelMeasure").transition().duration(500).text(d3.select("#bowlMeasureFilterSelection").property("value")+": "+(batScore[0].values.BowlScore).toFixed(2));
+            d3.select("#bowlScoreAreaLabelAvg").transition().duration(500).text("League Avg: "+(batScore[0].values.BowlScoreAggAvg).toFixed(2));
+            d3.select("#bowlScoreAreaLabelSd").transition().duration(500).text("League Std Dev: "+(batScore[0].values.BowlScoreAggSd).toFixed(2));
+            d3.select("#batScoreAreaLabelMeasure").transition().duration(500).text(d3.select("#batMeasureFilterSelection").property("value")+": "+(batScore[0].values.BatScore).toFixed(2));
+            d3.select("#batScoreAreaLabelAvg").transition().duration(500).text("League Avg: "+(batScore[0].values.BatScoreAggAvg).toFixed(2));
+            d3.select("#batScoreAreaLabelSd").transition().duration(500).text("League Std Dev: "+(batScore[0].values.BatScoreAggSd).toFixed(2));
         });
         d3.select("#bowlMeasureFilterSelection").on("change", function(d) {
 
@@ -667,16 +667,16 @@ p {
             var batScoreColor = getBatScoreColor(batScore);
             var bowlScoreColor = getBowlScoreColor(batScore);
             var FieldingScoreColor = getFieldingScoreColor(batScore);
-            d3.select("#arcTop").attr("stroke", batScoreColor).style("fill",  batScoreColor );
-            d3.select("#arcBottom").attr("stroke", bowlScoreColor).style("fill",  bowlScoreColor );
-            d3.select("#fieldScoreArea").attr("stroke", FieldingScoreColor)
+            d3.select("#arcTop").transition().duration(500).attr("stroke", batScoreColor).style("fill",  batScoreColor );
+            d3.select("#arcBottom").transition().duration(500).attr("stroke", bowlScoreColor).style("fill",  bowlScoreColor );
+            d3.select("#fieldScoreArea").transition().duration(500).attr("stroke", FieldingScoreColor)
 
-            d3.select("#bowlScoreAreaLabelMeasure").text(d3.select("#bowlMeasureFilterSelection").property("value")+": "+(batScore[0].values.BowlScore).toFixed(2));
-            d3.select("#bowlScoreAreaLabelAvg").text("League Avg: "+(batScore[0].values.BowlScoreAggAvg).toFixed(2));
-            d3.select("#bowlScoreAreaLabelSd").text("League Std Dev: "+(batScore[0].values.BowlScoreAggSd).toFixed(2));
-            d3.select("#batScoreAreaLabelMeasure").text(d3.select("#batMeasureFilterSelection").property("value")+": "+(batScore[0].values.BatScore).toFixed(2));
-            d3.select("#batScoreAreaLabelAvg").text("League Avg: "+(batScore[0].values.BatScoreAggAvg).toFixed(2));
-            d3.select("#batScoreAreaLabelSd").text("League Std Dev: "+(batScore[0].values.BatScoreAggSd).toFixed(2));
+            d3.select("#bowlScoreAreaLabelMeasure").transition().duration(500).text(d3.select("#bowlMeasureFilterSelection").property("value")+": "+(batScore[0].values.BowlScore).toFixed(2));
+            d3.select("#bowlScoreAreaLabelAvg").transition().duration(500).text("League Avg: "+(batScore[0].values.BowlScoreAggAvg).toFixed(2));
+            d3.select("#bowlScoreAreaLabelSd").transition().duration(500).text("League Std Dev: "+(batScore[0].values.BowlScoreAggSd).toFixed(2));
+            d3.select("#batScoreAreaLabelMeasure").transition().duration(500).text(d3.select("#batMeasureFilterSelection").property("value")+": "+(batScore[0].values.BatScore).toFixed(2));
+            d3.select("#batScoreAreaLabelAvg").transition().duration(500).text("League Avg: "+(batScore[0].values.BatScoreAggAvg).toFixed(2));
+            d3.select("#batScoreAreaLabelSd").transition().duration(500).text("League Std Dev: "+(batScore[0].values.BatScoreAggSd).toFixed(2));
         });
         d3.select("#teamFilterSelection").on("change", function(d) {
 
@@ -685,18 +685,18 @@ p {
             var batScoreColor = getBatScoreColor(batScore);
             var bowlScoreColor = getBowlScoreColor(batScore);
             var FieldingScoreColor = getFieldingScoreColor(batScore);
-            d3.select("#arcTop").attr("stroke", batScoreColor).style("fill",  batScoreColor );
-            d3.select("#arcBottom").attr("stroke", bowlScoreColor).style("fill",  bowlScoreColor );
-            d3.select("#fieldScoreArea").attr("stroke", FieldingScoreColor)
+            d3.select("#arcTop").transition().duration(500).attr("stroke", batScoreColor).style("fill",  batScoreColor )
+            d3.select("#arcBottom").transition().duration(500).attr("stroke", bowlScoreColor).style("fill",  bowlScoreColor );
+            d3.select("#fieldScoreArea").transition().duration(500).attr("stroke", FieldingScoreColor)
 
-            d3.select("#bowlScoreAreaLabelMeasure").text(d3.select("#bowlMeasureFilterSelection").property("value")+": "+(batScore[0].values.BowlScore).toFixed(2));
-            d3.select("#bowlScoreAreaLabelAvg").text("League Avg: "+(batScore[0].values.BowlScoreAggAvg).toFixed(2));
-            d3.select("#bowlScoreAreaLabelSd").text("League Std Dev: "+(batScore[0].values.BowlScoreAggSd).toFixed(2));
-            d3.select("#batScoreAreaLabelMeasure").text(d3.select("#batMeasureFilterSelection").property("value")+": "+(batScore[0].values.BatScore).toFixed(2));
-            d3.select("#batScoreAreaLabelAvg").text("League Avg: "+(batScore[0].values.BatScoreAggAvg).toFixed(2));
-            d3.select("#batScoreAreaLabelSd").text("League Std Dev: "+(batScore[0].values.BatScoreAggSd).toFixed(2));
+            d3.select("#bowlScoreAreaLabelMeasure").transition().duration(500).text(d3.select("#bowlMeasureFilterSelection").property("value")+": "+(batScore[0].values.BowlScore).toFixed(2));
+            d3.select("#bowlScoreAreaLabelAvg").transition().duration(500).text("League Avg: "+(batScore[0].values.BowlScoreAggAvg).toFixed(2));
+            d3.select("#bowlScoreAreaLabelSd").transition().duration(500).text("League Std Dev: "+(batScore[0].values.BowlScoreAggSd).toFixed(2));
+            d3.select("#batScoreAreaLabelMeasure").transition().duration(500).text(d3.select("#batMeasureFilterSelection").property("value")+": "+(batScore[0].values.BatScore).toFixed(2));
+            d3.select("#batScoreAreaLabelAvg").transition().duration(500).text("League Avg: "+(batScore[0].values.BatScoreAggAvg).toFixed(2));
+            d3.select("#batScoreAreaLabelSd").transition().duration(500).text("League Std Dev: "+(batScore[0].values.BatScoreAggSd).toFixed(2));
             d3.select("#ScatterPlotSVG").remove();
-
+            drawScatterPlot()
 
         });
         drawCricketField();
@@ -795,16 +795,16 @@ p {
                         var batScoreColor = getBatScoreColor(batScore);
                         var bowlScoreColor = getBowlScoreColor(batScore);
                         var FieldingScoreColor = getFieldingScoreColor(batScore);
-                        d3.select("#arcTop").attr("stroke", batScoreColor).style("fill",  batScoreColor );
-                        d3.select("#arcBottom").attr("stroke", bowlScoreColor).style("fill",  bowlScoreColor );
-                        d3.select("#fieldScoreArea").attr("stroke", FieldingScoreColor)
+                        d3.select("#arcTop").transition().duration(500).attr("stroke", batScoreColor).style("fill",  batScoreColor );
+                        d3.select("#arcBottom").transition().duration(500).attr("stroke", bowlScoreColor).style("fill",  bowlScoreColor );
+                        d3.select("#fieldScoreArea").transition().duration(500).attr("stroke", FieldingScoreColor)
 
-                        d3.select("#bowlScoreAreaLabelMeasure").text(d3.select("#bowlMeasureFilterSelection").property("value")+": "+(batScore[0].values.BowlScore).toFixed(2));
-                        d3.select("#bowlScoreAreaLabelAvg").text("League Avg: "+(batScore[0].values.BowlScoreAggAvg).toFixed(2));
-                        d3.select("#bowlScoreAreaLabelSd").text("League Std Dev: "+(batScore[0].values.BowlScoreAggSd).toFixed(2));
-                        d3.select("#batScoreAreaLabelMeasure").text(d3.select("#batMeasureFilterSelection").property("value")+": "+(batScore[0].values.BatScore).toFixed(2));
-                        d3.select("#batScoreAreaLabelAvg").text("League Avg: "+(batScore[0].values.BatScoreAggAvg).toFixed(2));
-                        d3.select("#batScoreAreaLabelSd").text("League Std Dev: "+(batScore[0].values.BatScoreAggSd).toFixed(2));
+                        d3.select("#bowlScoreAreaLabelMeasure").transition().duration(500).text(d3.select("#bowlMeasureFilterSelection").property("value")+": "+(batScore[0].values.BowlScore).toFixed(2));
+                        d3.select("#bowlScoreAreaLabelAvg").transition().duration(500).text("League Avg: "+(batScore[0].values.BowlScoreAggAvg).toFixed(2));
+                        d3.select("#bowlScoreAreaLabelSd").transition().duration(500).text("League Std Dev: "+(batScore[0].values.BowlScoreAggSd).toFixed(2));
+                        d3.select("#batScoreAreaLabelMeasure").transition().duration(500).text(d3.select("#batMeasureFilterSelection").property("value")+": "+(batScore[0].values.BatScore).toFixed(2));
+                        d3.select("#batScoreAreaLabelAvg").transition().duration(500).text("League Avg: "+(batScore[0].values.BatScoreAggAvg).toFixed(2));
+                        d3.select("#batScoreAreaLabelSd").transition().duration(500).text("League Std Dev: "+(batScore[0].values.BatScoreAggSd).toFixed(2));
                     })
 
                 })

@@ -80,8 +80,8 @@ p {
 
 #scatterMeasureFilterSelection{
     position:absolute;
-    bottom:325px;
-    left:850px;}
+    bottom:335px;
+    left:615px;}
 
 #scatterPlot{
     position:absolute;
@@ -302,10 +302,10 @@ p {
                     if (d.a == 2) {
                         return "#92c5de"
                     }
-                    if (d.a == 3) {
+                    if (d.a == 4) {
                         return "#ca0020"
                     }
-                    if (d.a == 4) {
+                    if (d.a == 3) {
                         return "#f4a582"
                     }
                     ;
@@ -365,6 +365,7 @@ p {
             .append('option')
             .text(function(d){return d;})
             .attr("value",function(d){return d;});
+        d3.select('#scatterMeasureFilterSelection').property('value', 'BowlingEconomy');
 
 
         // populating the years in the filter drop down
@@ -419,19 +420,27 @@ p {
         }
 
         function aggregateDataScatter(){
-            filteredToTeam = cricketdummy.filter(function(d){return d.Team == d3.select("#teamFilterSelection").property("value");});
+            //filteredToTeam = cricketdummy.filter(function(d){return d.Team == d3.select("#teamFilterSelection").property("value");});
             var dataAggregation = d3.nest()
                 .key(function(d) { return d.Year;})
                 .rollup(function(d) { return {
-                    MatchesWon: d3.sum(d, function(d) { if (d.MeasureName  == "MatchesWon" ) { return d.MeasureValue }
-                    else { return 0 }
+                    MatchesWon: d3.sum(d, function(d) { if (d.MeasureName  == "MatchesWon" && d.Team  == d3.select("#teamFilterSelection").property("value")) { return d.MeasureValue }
+                    else { return null }
                         ; }),
-                    ScatterMeasure: d3.sum(d, function(d) { if (d.MeasureName  == "AverageOfRunsScored" ) { return d.MeasureValue }
-                    else { return 0 }
+                    ScatterMeasure: d3.sum(d, function(d) { if (d.MeasureName  == d3.select("#scatterMeasureFilterSelection").property("value") && d.Team  == d3.select("#teamFilterSelection").property("value")) { return d.MeasureValue }
+                    else { return null }
+                        ; }),
+
+                    ScatterMeasureAggAvg: d3.mean(d, function(d) { if (d.MeasureName  == d3.select("#scatterMeasureFilterSelection").property("value")) { return d.MeasureValue }
+                    else { return null }
+                        ; }),
+                    ScatterMeasureAggSd: d3.deviation(d, function(d) { if (d.MeasureName  == d3.select("#scatterMeasureFilterSelection").property("value")) { return d.MeasureValue }
+                    else { return null }
                         ; })
 
-                }; }).entries(filteredToTeam);
-            return dataAggregation
+                }; }).entries(cricketdummy);
+            var filtereddata = dataAggregation.filter(function(d){return d.values.ScatterMeasure > 0;});
+            return filtereddata
         }
         function getBatScoreColor(batScore)
         {
@@ -443,7 +452,7 @@ p {
             else if (batScore[0].values.BatScore >= batScore[0].values.BatScoreAggAvg) {
                 batScoreColor = "#92c5de";
             }
-            else if (batScore[0].values.BatScore < batScore[0].values.BatScoreAggSd - batScore[0].values.BatScoreAggAvg) {
+            else if (batScore[0].values.BatScore < batScore[0].values.BatScoreAggAvg-batScore[0].values.BatScoreAggSd) {
                 batScoreColor = "#ca0020";
             }
             else if (batScore[0].values.BatScore <= batScore[0].values.BatScoreAggAvg) {
@@ -461,7 +470,7 @@ p {
             else if (batScore[0].values.BowlScore >= batScore[0].values.BowlScoreAggAvg) {
                 BowlScoreColor = "#92c5de";
             }
-            else if (batScore[0].values.BowlScore < batScore[0].values.BowlScoreAggSd - batScore[0].values.BowlScoreAggAvg) {
+            else if (batScore[0].values.BowlScore <  batScore[0].values.BowlScoreAggAvg-batScore[0].values.BowlScoreAggSd) {
                 BowlScoreColor = "#ca0020";
             }
             else if (batScore[0].values.BowlScore <= batScore[0].values.BowlScoreAggAvg) {
@@ -479,7 +488,7 @@ p {
             else if (batScore[0].values.FieldingScore >= batScore[0].values.FieldingScoreAggAvg) {
                 FieldingScoreColor = "#92c5de";
             }
-            else if (batScore[0].values.FieldingScore < batScore[0].values.FieldingScoreAggSd - batScore[0].values.FieldingScoreAggAvg) {
+            else if (batScore[0].values.FieldingScore < batScore[0].values.FieldingScoreAggAvg-batScore[0].values.FieldingScoreAggSd ) {
                 FieldingScoreColor = "#ca0020";
             }
             else if (batScore[0].values.FieldingScore <= batScore[0].values.FieldingScoreAggAvg) {
@@ -608,7 +617,8 @@ p {
                 .attr("x", fieldSVGWidth/centerOfFieldFactor)
                 .attr("y", fieldSVGHeight/centerOfFieldFactor + closeInfieldOffset + 90)
                 .attr("text-anchor", "middle")
-                .style("font-size", "12px")
+                .style("font-size", "14px")
+                .style("font-weight", "bold")
                 .style("fill", "#f6f9f9")
                 .style("font-family", "Helvetica")
                 .text(d3.select("#bowlMeasureFilterSelection").property("value")+": "+(batScore[0].values.BowlScore).toFixed(2));
@@ -638,7 +648,8 @@ p {
                 .attr("x", fieldSVGWidth/centerOfFieldFactor)
                 .attr("y", fieldSVGHeight/centerOfFieldFactor + closeInfieldOffset - 185)
                 .attr("text-anchor", "middle")
-                .style("font-size", "12px")
+                .style("font-size", "14px")
+                .style("font-weight", "bold")
                 .style("fill", "#f6f9f9")
                 .style("font-family", "Helvetica")
                 .text(d3.select("#batMeasureFilterSelection").property("value")+": "+(batScore[0].values.BatScore).toFixed(2));
@@ -760,6 +771,11 @@ p {
             d3.select("#batScoreAreaLabelAvg").transition().duration(500).text("League Avg: "+(batScore[0].values.BatScoreAggAvg).toFixed(2));
             d3.select("#batScoreAreaLabelSd").transition().duration(500).text("League Std Dev: "+(batScore[0].values.BatScoreAggSd).toFixed(2));
         });
+        d3.select("#scatterMeasureFilterSelection").on("change", function(d) {
+
+            d3.select("#ScatterPlotSVG").remove();
+            drawScatterPlot()
+        });
         d3.select("#bowlMeasureFilterSelection").on("change", function(d) {
 
             var batScore = aggregateData();
@@ -819,6 +835,7 @@ p {
 
         function drawScatterPlot() {
             var scatterData = aggregateDataScatter()
+            console.log(scatterData)
             var margin = {top: 20, right: 20, bottom: 30, left: 40},
                 width = 500 - margin.left - margin.right,
                 height = 325 - margin.top - margin.bottom;
@@ -852,7 +869,7 @@ p {
                 .attr("class", "tooltip")
                 .style("opacity", 0);
 
-
+            var scatterMeasureLabel = d3.select("#scatterMeasureFilterSelection").property("value")
 
             xScale.domain([d3.min(scatterData, xValue)-1, d3.max(scatterData, xValue)+1]);
             yScale.domain([d3.min(scatterData, yValue)-1, d3.max(scatterData, yValue)+1]);
@@ -879,7 +896,7 @@ p {
                 .attr("y", 6)
                 .attr("dy", ".71em")
                 .style("text-anchor", "end")
-                .text("Wickets Per Match");
+                .text(scatterMeasureLabel);
 
             // draw dots
             svg.selectAll(".dot")
@@ -890,7 +907,20 @@ p {
                 .attr("r", 7.5)
                 .attr("cx", xMap)
                 .attr("cy", yMap)
-                .style("fill", function(d) { return color(cValue(d));})
+                .style("fill", function (d) {
+                    if (d.values.ScatterMeasure > d.values.ScatterMeasureAggSd + d.values.ScatterMeasureAggAvg) {
+                        return  "#0571b0";
+                    }
+                    else if (d.values.ScatterMeasure >= d.values.ScatterMeasureAggAvg) {
+                        return "#92c5de";
+                    }
+                    else if (d.values.ScatterMeasure < d.values.ScatterMeasureAggAvg-d.values.ScatterMeasureAggSd ) {
+                        return "#ca0020";
+                    }
+                    else if (d.values.ScatterMeasure <= d.values.ScatterMeasureAggAvg) {
+                        return "#f4a582";
+                    }
+                })
                 .on("mouseover", function(d) {
                     d3.select(this)
                         .transition()
@@ -932,8 +962,8 @@ p {
                 .append('title') // Tooltip
                 .text(function (d) { return d.key +
                     '\nMatches Won: ' + d.values.MatchesWon +
-                    '\nWickets Per Match: ' + d.BowlingEconomy +
-                    '\nAvg Runs Scored: ' + d.values.ScatterMeasure})
+                    '\n'+ scatterMeasureLabel +': ' + d.values.ScatterMeasure
+                    })
 
 
         }
@@ -999,7 +1029,7 @@ p {
                      else if (d.values.BatScore >= d.values.BatScoreAggAvg) {
                          return "#92c5de";
                      }
-                     else if (d.values.BatScore < d.values.BatScoreAggSd - d.values.BatScoreAggAvg) {
+                     else if (d.values.BatScore < d.values.BatScoreAggAvg-d.values.BatScoreAggSd ) {
                          return "#ca0020";
                      }
                      else if (d.values.BatScore <= d.values.BatScoreAggAvg) {
@@ -1045,6 +1075,7 @@ p {
                         d3.select("#batScoreAreaLabelMeasure").transition().duration(500).text(d3.select("#batMeasureFilterSelection").property("value")+": "+(batScore[0].values.BatScore).toFixed(2));
                         d3.select("#batScoreAreaLabelAvg").transition().duration(500).text("League Avg: "+(batScore[0].values.BatScoreAggAvg).toFixed(2));
                         d3.select("#batScoreAreaLabelSd").transition().duration(500).text("League Std Dev: "+(batScore[0].values.BatScoreAggSd).toFixed(2));
+
                     })
                 })
                 .on("mouseout", function(d) {
@@ -1058,7 +1089,7 @@ p {
                             else if (d.values.BatScore >= d.values.BatScoreAggAvg) {
                                 return "#92c5de";
                             }
-                            else if (d.values.BatScore < d.values.BatScoreAggSd - d.values.BatScoreAggAvg) {
+                            else if (d.values.BatScore < d.values.BatScoreAggAvg-d.values.BatScoreAggSd) {
                                 return "#ca0020";
                             }
                             else if (d.values.BatScore <= d.values.BatScoreAggAvg) {

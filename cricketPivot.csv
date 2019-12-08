@@ -383,54 +383,54 @@
 2014,Rajastan Royals,HighScore ,Batting,136.1333333
 2014,Royal Challengers Bangalore,HighScore ,Batting,132.2
 2014,Sunrisers Hyderabad,HighScore ,Batting,161.25
-2019,Chennai Super Kings,AverageOfRunsScored,Batting,137.23
-2019,Delhi Capitals,AverageOfRunsScored,Batting,149.8125
-2019,Kings XI Punjab,AverageOfRunsScored,Batting,165.2857143
-2019,Kolkata Knight Riders,AverageOfRunsScored,Batting,166.7857143
-2019,Mumbai Indians,AverageOfRunsScored,Batting,158.75
-2019,Rajastan Royals,AverageOfRunsScored,Batting,148.4285714
-2019,Royal Challengers Bangalore,AverageOfRunsScored,Batting,150.5
-2019,Sunrisers Hyderabad,AverageOfRunsScored,Batting,154.8
-2018,Chennai Super Kings,AverageOfRunsScored,Batting,167.1875
-2018,Delhi Capitals,AverageOfRunsScored,Batting,159.5714286
-2018,Kings XI Punjab,AverageOfRunsScored,Batting,148.6428571
-2018,Kolkata Knight Riders,AverageOfRunsScored,Batting,164.25
-2018,Mumbai Indians,AverageOfRunsScored,Batting,159.2142857
-2018,Rajastan Royals,AverageOfRunsScored,Batting,150.4666667
-2018,Royal Challengers Bangalore,AverageOfRunsScored,Batting,159.5
-2018,Sunrisers Hyderabad,AverageOfRunsScored,Batting,152.2941176
-2017,Delhi Capitals,AverageOfRunsScored,Batting,150.0714286
-2017,Gujrat Lions,AverageOfRunsScored,Batting,163.5
-2017,Kings XI Punjab,AverageOfRunsScored,Batting,147.5714286
-2017,Kolkata Knight Riders,AverageOfRunsScored,Batting,145.375
-2017,Mumbai Indians,AverageOfRunsScored,Batting,153.4117647
-2017,Rising Pune Supergiants,AverageOfRunsScored,Batting,145.9375
-2017,Royal Challengers Bangalore,AverageOfRunsScored,Batting,122.4285714
-2017,Sunrisers Hyderabad,AverageOfRunsScored,Batting,160.3571429
-2016,Delhi Capitals,AverageOfRunsScored,Batting,140.1428571
-2016,Gujrat Lions,AverageOfRunsScored,Batting,144.3125
-2016,Kings XI Punjab,AverageOfRunsScored,Batting,143.7142857
-2016,Kolkata Knight Riders,AverageOfRunsScored,Batting,141.3333333
-2016,Mumbai Indians,AverageOfRunsScored,Batting,148.0714286
-2016,Rising Pune Supergiants,AverageOfRunsScored,Batting,138.2142857
-2016,Royal Challengers Bangalore,AverageOfRunsScored,Batting,177.75
-2016,Sunrisers Hyderabad,AverageOfRunsScored,Batting,149.1764706
-2015,Chennai Super Kings,AverageOfRunsScored,Batting,150.64
-2015,Delhi Capitals,AverageOfRunsScored,Batting,145.7857143
-2015,Kings XI Punjab,AverageOfRunsScored,Batting,133.7142857
-2015,Kolkata Knight Riders,AverageOfRunsScored,Batting,137.2857143
-2015,Mumbai Indians,AverageOfRunsScored,Batting,162.75
-2015,Rajastan Royals,AverageOfRunsScored,Batting,144.5
-2015,Royal Challengers Bangalore,AverageOfRunsScored,Batting,136.1875
-2015,Sunrisers Hyderabad,AverageOfRunsScored,Batting,151
-2014,Chennai Super Kings,AverageOfRunsScored,Batting,157.35
-2014,Delhi Capitals,AverageOfRunsScored,Batting,140.2142857
-2014,Kings XI Punjab,AverageOfRunsScored,Batting,165.5882353
-2014,Kolkata Knight Riders,AverageOfRunsScored,Batting,147.3125
-2014,Mumbai Indians,AverageOfRunsScored,Batting,148.4
-2014,Rajastan Royals,AverageOfRunsScored,Batting,145.8571429
-2014,Royal Challengers Bangalore,AverageOfRunsScored,Batting,141.6428571
-2014,Sunrisers Hyderabad,AverageOfRunsScored,Batting,138.2142857
+2019,Chennai Super Kings,RunsScored,Batting,137.23
+2019,Delhi Capitals,RunsScored,Batting,149.8125
+2019,Kings XI Punjab,RunsScored,Batting,165.2857143
+2019,Kolkata Knight Riders,RunsScored,Batting,166.7857143
+2019,Mumbai Indians,RunsScored,Batting,158.75
+2019,Rajastan Royals,RunsScored,Batting,148.4285714
+2019,Royal Challengers Bangalore,RunsScored,Batting,150.5
+2019,Sunrisers Hyderabad,RunsScored,Batting,154.8
+2018,Chennai Super Kings,RunsScored,Batting,167.1875
+2018,Delhi Capitals,RunsScored,Batting,159.5714286
+2018,Kings XI Punjab,RunsScored,Batting,148.6428571
+2018,Kolkata Knight Riders,RunsScored,Batting,164.25
+2018,Mumbai Indians,RunsScored,Batting,159.2142857
+2018,Rajastan Royals,RunsScored,Batting,150.4666667
+2018,Royal Challengers Bangalore,RunsScored,Batting,159.5
+2018,Sunrisers Hyderabad,RunsScored,Batting,152.2941176
+2017,Delhi Capitals,RunsScored,Batting,150.0714286
+2017,Gujrat Lions,RunsScored,Batting,163.5
+2017,Kings XI Punjab,RunsScored,Batting,147.5714286
+2017,Kolkata Knight Riders,RunsScored,Batting,145.375
+2017,Mumbai Indians,RunsScored,Batting,153.4117647
+2017,Rising Pune Supergiants,RunsScored,Batting,145.9375
+2017,Royal Challengers Bangalore,RunsScored,Batting,122.4285714
+2017,Sunrisers Hyderabad,RunsScored,Batting,160.3571429
+2016,Delhi Capitals,RunsScored,Batting,140.1428571
+2016,Gujrat Lions,RunsScored,Batting,144.3125
+2016,Kings XI Punjab,RunsScored,Batting,143.7142857
+2016,Kolkata Knight Riders,RunsScored,Batting,141.3333333
+2016,Mumbai Indians,RunsScored,Batting,148.0714286
+2016,Rising Pune Supergiants,RunsScored,Batting,138.2142857
+2016,Royal Challengers Bangalore,RunsScored,Batting,177.75
+2016,Sunrisers Hyderabad,RunsScored,Batting,149.1764706
+2015,Chennai Super Kings,RunsScored,Batting,150.64
+2015,Delhi Capitals,RunsScored,Batting,145.7857143
+2015,Kings XI Punjab,RunsScored,Batting,133.7142857
+2015,Kolkata Knight Riders,RunsScored,Batting,137.2857143
+2015,Mumbai Indians,RunsScored,Batting,162.75
+2015,Rajastan Royals,RunsScored,Batting,144.5
+2015,Royal Challengers Bangalore,RunsScored,Batting,136.1875
+2015,Sunrisers Hyderabad,RunsScored,Batting,151
+2014,Chennai Super Kings,RunsScored,Batting,157.35
+2014,Delhi Capitals,RunsScored,Batting,140.2142857
+2014,Kings XI Punjab,RunsScored,Batting,165.5882353
+2014,Kolkata Knight Riders,RunsScored,Batting,147.3125
+2014,Mumbai Indians,RunsScored,Batting,148.4
+2014,Rajastan Royals,RunsScored,Batting,145.8571429
+2014,Royal Challengers Bangalore,RunsScored,Batting,141.6428571
+2014,Sunrisers Hyderabad,RunsScored,Batting,138.2142857
 2019,Chennai Super Kings,BallsFaced,Batting,116.0588235
 2019,Delhi Capitals,BallsFaced,Batting,114.0625
 2019,Kings XI Punjab,BallsFaced,Batting,116.9285714
@@ -1027,58 +1027,58 @@
 2013,Rajastan Royals,50s,Batting,0.666666667
 2013,Royal Challengers Banglore,50s,Batting,0.625
 2013,Pune Warriors India,50s,Batting,0.4375
-2008,Chennai Super Kings,AverageOfRunsScored,Batting,143.9375
-2008,Deccan Chargers,AverageOfRunsScored,Batting,144.9285714
-2008,Delhi Capitals,AverageOfRunsScored,Batting,141.1428571
-2008,Kings XI Punjab,AverageOfRunsScored,Batting,153.8
-2008,Kolkata Knight Riders,AverageOfRunsScored,Batting,107.8461538
-2008,Mumbai Indians,AverageOfRunsScored,Batting,125.6428571
-2008,Rajastan Royals,AverageOfRunsScored,Batting,149.5
-2008,Royal Challengers Banglore,AverageOfRunsScored,Batting,132.2857143
-2009,Chennai Super Kings,AverageOfRunsScored,Batting,146.0714286
-2009,Deccan Chargers,AverageOfRunsScored,Batting,139.625
-2009,Delhi Capitals,AverageOfRunsScored,Batting,134.8571429
-2009,Kings XI Punjab,AverageOfRunsScored,Batting,125.8571429
-2009,Kolkata Knight Riders,AverageOfRunsScored,Batting,113.6923077
-2009,Mumbai Indians,AverageOfRunsScored,Batting,133
-2009,Rajastan Royals,AverageOfRunsScored,Batting,119.2307692
-2009,Royal Challengers Banglore,AverageOfRunsScored,Batting,134.625
-2010,Chennai Super Kings,AverageOfRunsScored,Batting,145.625
-2010,Deccan Chargers,AverageOfRunsScored,Batting,138.25
-2010,Delhi Capitals,AverageOfRunsScored,Batting,142.7857143
-2010,Kings XI Punjab,AverageOfRunsScored,Batting,149.9285714
-2010,Kolkata Knight Riders,AverageOfRunsScored,Batting,140.2857143
-2010,Mumbai Indians,AverageOfRunsScored,Batting,168.2
-2010,Rajastan Royals,AverageOfRunsScored,Batting,138.7142857
-2010,Royal Challengers Banglore,AverageOfRunsScored,Batting,147.9333333
-2011,Chennai Super Kings,AverageOfRunsScored,Batting,152.5625
-2011,Deccan Chargers,AverageOfRunsScored,Batting,144.8571429
-2011,Delhi Capitals,AverageOfRunsScored,Batting,133.0714286
-2011,Kings XI Punjab,AverageOfRunsScored,Batting,125.7857143
-2011,Kolkata Knight Riders,AverageOfRunsScored,Batting,121.2
-2011,Mumbai Indians,AverageOfRunsScored,Batting,130.5
-2011,Rajastan Royals,AverageOfRunsScored,Batting,109.2857143
-2011,Royal Challengers Banglore,AverageOfRunsScored,Batting,148.4666667
-2011,Pune Warriors India,AverageOfRunsScored,Batting,110.9285714
-2011,Kochi Tuskers Kerala,AverageOfRunsScored,Batting,117.0714286
-2012,Chennai Super Kings,AverageOfRunsScored,Batting,147.7222222
-2012,Deccan Chargers,AverageOfRunsScored,Batting,149.0714286
-2012,Delhi Capitals,AverageOfRunsScored,Batting,124.7777778
-2012,Kings XI Punjab,AverageOfRunsScored,Batting,157.1428571
-2012,Kolkata Knight Riders,AverageOfRunsScored,Batting,136.7058824
-2012,Mumbai Indians,AverageOfRunsScored,Batting,134.3529412
-2012,Rajastan Royals,AverageOfRunsScored,Batting,166.9285714
-2012,Royal Challengers Banglore,AverageOfRunsScored,Batting,161.6428571
-2012,Pune Warriors India,AverageOfRunsScored,Batting,148.5714286
-2013,Chennai Super Kings,AverageOfRunsScored,Batting,129.2222222
-2013,Sunrisers Hyderabad,AverageOfRunsScored,Batting,126.3529412
-2013,Delhi Capitals,AverageOfRunsScored,Batting,124.25
-2013,Kings XI Punjab,AverageOfRunsScored,Batting,143.4375
-2013,Kolkata Knight Riders,AverageOfRunsScored,Batting,126
-2013,Mumbai Indians,AverageOfRunsScored,Batting,147.5789474
-2013,Rajastan Royals,AverageOfRunsScored,Batting,128.2777778
-2013,Royal Challengers Banglore,AverageOfRunsScored,Batting,147.5
-2013,Pune Warriors India,AverageOfRunsScored,Batting,128.375
+2008,Chennai Super Kings,RunsScored,Batting,143.9375
+2008,Deccan Chargers,RunsScored,Batting,144.9285714
+2008,Delhi Capitals,RunsScored,Batting,141.1428571
+2008,Kings XI Punjab,RunsScored,Batting,153.8
+2008,Kolkata Knight Riders,RunsScored,Batting,107.8461538
+2008,Mumbai Indians,RunsScored,Batting,125.6428571
+2008,Rajastan Royals,RunsScored,Batting,149.5
+2008,Royal Challengers Banglore,RunsScored,Batting,132.2857143
+2009,Chennai Super Kings,RunsScored,Batting,146.0714286
+2009,Deccan Chargers,RunsScored,Batting,139.625
+2009,Delhi Capitals,RunsScored,Batting,134.8571429
+2009,Kings XI Punjab,RunsScored,Batting,125.8571429
+2009,Kolkata Knight Riders,RunsScored,Batting,113.6923077
+2009,Mumbai Indians,RunsScored,Batting,133
+2009,Rajastan Royals,RunsScored,Batting,119.2307692
+2009,Royal Challengers Banglore,RunsScored,Batting,134.625
+2010,Chennai Super Kings,RunsScored,Batting,145.625
+2010,Deccan Chargers,RunsScored,Batting,138.25
+2010,Delhi Capitals,RunsScored,Batting,142.7857143
+2010,Kings XI Punjab,RunsScored,Batting,149.9285714
+2010,Kolkata Knight Riders,RunsScored,Batting,140.2857143
+2010,Mumbai Indians,RunsScored,Batting,168.2
+2010,Rajastan Royals,RunsScored,Batting,138.7142857
+2010,Royal Challengers Banglore,RunsScored,Batting,147.9333333
+2011,Chennai Super Kings,RunsScored,Batting,152.5625
+2011,Deccan Chargers,RunsScored,Batting,144.8571429
+2011,Delhi Capitals,RunsScored,Batting,133.0714286
+2011,Kings XI Punjab,RunsScored,Batting,125.7857143
+2011,Kolkata Knight Riders,RunsScored,Batting,121.2
+2011,Mumbai Indians,RunsScored,Batting,130.5
+2011,Rajastan Royals,RunsScored,Batting,109.2857143
+2011,Royal Challengers Banglore,RunsScored,Batting,148.4666667
+2011,Pune Warriors India,RunsScored,Batting,110.9285714
+2011,Kochi Tuskers Kerala,RunsScored,Batting,117.0714286
+2012,Chennai Super Kings,RunsScored,Batting,147.7222222
+2012,Deccan Chargers,RunsScored,Batting,149.0714286
+2012,Delhi Capitals,RunsScored,Batting,124.7777778
+2012,Kings XI Punjab,RunsScored,Batting,157.1428571
+2012,Kolkata Knight Riders,RunsScored,Batting,136.7058824
+2012,Mumbai Indians,RunsScored,Batting,134.3529412
+2012,Rajastan Royals,RunsScored,Batting,166.9285714
+2012,Royal Challengers Banglore,RunsScored,Batting,161.6428571
+2012,Pune Warriors India,RunsScored,Batting,148.5714286
+2013,Chennai Super Kings,RunsScored,Batting,129.2222222
+2013,Sunrisers Hyderabad,RunsScored,Batting,126.3529412
+2013,Delhi Capitals,RunsScored,Batting,124.25
+2013,Kings XI Punjab,RunsScored,Batting,143.4375
+2013,Kolkata Knight Riders,RunsScored,Batting,126
+2013,Mumbai Indians,RunsScored,Batting,147.5789474
+2013,Rajastan Royals,RunsScored,Batting,128.2777778
+2013,Royal Challengers Banglore,RunsScored,Batting,147.5
+2013,Pune Warriors India,RunsScored,Batting,128.375
 2008,Chennai Super Kings,BallsFaced,Batting,107.5
 2008,Deccan Chargers,BallsFaced,Batting,109.1428571
 2008,Delhi Capitals,BallsFaced,Batting,141.1428571
@@ -1443,3 +1443,55 @@
 2013,Rajastan Royals,WicketsPerOver,Bowling,0.290556901
 2013,Royal Challengers Banglore,WicketsPerOver,Bowling,0.322913088
 2013,Pune Warriors India,WicketsPerOver,Bowling,0.263780859
+2008,Chennai Super Kings,StrikeRate,Batting,139
+2008,Deccan Chargers,StrikeRate,Batting,130.01
+2008,Delhi Capitals,StrikeRate,Batting,127.74
+2008,Kings XI Punjab,StrikeRate,Batting,133.25
+2008,Kolkata Knight Riders,StrikeRate,Batting,128.09
+2008,Mumbai Indians,StrikeRate,Batting,123.7
+2008,Rajastan Royals,StrikeRate,Batting,131.48
+2008,Royal Challengers Banglore,StrikeRate,Batting,110.74
+2009,Chennai Super Kings,StrikeRate,Batting,124.52
+2009,Deccan Chargers,StrikeRate,Batting,122.6
+2009,Delhi Capitals,StrikeRate,Batting,125.01
+2009,Kings XI Punjab,StrikeRate,Batting,104.37
+2009,Kolkata Knight Riders,StrikeRate,Batting,112.71
+2009,Mumbai Indians,StrikeRate,Batting,115.65
+2009,Rajastan Royals,StrikeRate,Batting,103.31
+2009,Royal Challengers Banglore,StrikeRate,Batting,113.4
+2010,Chennai Super Kings,StrikeRate,Batting,118.73
+2010,Deccan Chargers,StrikeRate,Batting,109.08
+2010,Delhi Capitals,StrikeRate,Batting,121.2
+2010,Kings XI Punjab,StrikeRate,Batting,123.2
+2010,Kolkata Knight Riders,StrikeRate,Batting,121.77
+2010,Mumbai Indians,StrikeRate,Batting,125.13
+2010,Rajastan Royals,StrikeRate,Batting,131.14
+2010,Royal Challengers Banglore,StrikeRate,Batting,125.29
+2011,Chennai Super Kings,StrikeRate,Batting,127.77
+2011,Deccan Chargers,StrikeRate,Batting,129.1
+2011,Delhi Capitals,StrikeRate,Batting,124.86
+2011,Kings XI Punjab,StrikeRate,Batting,100.83
+2011,Kolkata Knight Riders,StrikeRate,Batting,117.66
+2011,Mumbai Indians,StrikeRate,Batting,121.1
+2011,Rajastan Royals,StrikeRate,Batting,113.8
+2011,Royal Challengers Banglore,StrikeRate,Batting,135
+2011,Pune Warriors India,StrikeRate,Batting,110
+2011,Kochi Tuskers Kerala,StrikeRate,Batting,111.04
+2012,Chennai Super Kings,StrikeRate,Batting,129.38
+2012,Deccan Chargers,StrikeRate,Batting,121.6
+2012,Delhi Capitals,StrikeRate,Batting,130.11
+2012,Kings XI Punjab,StrikeRate,Batting,125
+2012,Kolkata Knight Riders,StrikeRate,Batting,120
+2012,Mumbai Indians,StrikeRate,Batting,119.46
+2012,Rajastan Royals,StrikeRate,Batting,130.9
+2012,Royal Challengers Banglore,StrikeRate,Batting,132
+2012,Pune Warriors India,StrikeRate,Batting,121
+2013,Chennai Super Kings,StrikeRate,Batting,123.74
+2013,Sunrisers Hyderabad,StrikeRate,Batting,113.69
+2013,Delhi Capitals,StrikeRate,Batting,112
+2013,Kings XI Punjab,StrikeRate,Batting,128.74
+2013,Kolkata Knight Riders,StrikeRate,Batting,114
+2013,Mumbai Indians,StrikeRate,Batting,124.62
+2013,Rajastan Royals,StrikeRate,Batting,129.39
+2013,Royal Challengers Banglore,StrikeRate,Batting,122.36
+2013,Pune Warriors India,StrikeRate,Batting,113.86

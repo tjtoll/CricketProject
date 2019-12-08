@@ -20,7 +20,7 @@
 #bowlMeasureFilterSelection{
     position:absolute;
     bottom:70px;
-    left:380px;}
+    left:320px;}
 
 #yearFilterTitle{
     position:absolute;
@@ -39,7 +39,7 @@
 #bowlMeasureFilterTitle{
     position:absolute;
     bottom:90px;
-    left:380px;
+    left:320px;
     font-family: sans-serif;
     font-size: 12px;}
 
@@ -80,25 +80,25 @@ p {
 
 #scatterMeasureFilterSelection{
     position:absolute;
-    bottom:335px;
-    left:615px;}
+    top:375px;
+    left:1070px;}
 
 #scatterPlot{
     position:absolute;
-    bottom:45px;
-    left:550px;}
+    top:360px;
+    left:990px;}
 
 #scatterPlotTitle{
     position:absolute;
-    bottom:360px;
-    left:585px;
+    top:350px;
+    left:1025px;
     font-family: sans-serif;
     font-size: 18px;}
 
 #sparkLinesTitle{
     position:absolute;
-    bottom:360px;
-    left:1070px;
+    top:350px;
+    left:550px;
     font-family: sans-serif;
     font-size: 18px;}
 
@@ -106,23 +106,29 @@ p {
     position:absolute;
     width: 100px;
     height: 75px;
-    bottom:285px;
-    right:350px;}
+    top:380px;
+    left:850px;}
 
 #leftSpark2{
     position:absolute;
     width: 100px;
     height: 75px;
-    bottom:215px;
-    right:350px;}
+    top:450px;
+    left:850px;}
 
 #leftSpark3{
     position:absolute;
     width: 100px;
     height: 75px;
-    bottom:145px;
-    right:350px;}
+    top:520px;
+    left:850px;}
 
+#leftSpark4{
+    position:absolute;
+    width: 100px;
+    height: 75px;
+    top:590px;
+    left:850px;}
 .axis path,
 .axis line {
     fill: none;
@@ -130,69 +136,64 @@ p {
     shape-rendering: crispEdges;
 }
 
-#leftSpark4{
-    position:absolute;
-    width: 100px;
-    height: 75px;
-    bottom:75px;
-    right:350px;}
+
 
 #middleSpark1{
     position:absolute;
     width: 100px;
     height: 75px;
-    bottom:285px;
-    right:200px;}
+    top:380px;
+    left:700px;}
 
 #middleSpark2{
     position:absolute;
     width: 100px;
     height: 75px;
-    bottom:215px;
-    right:200px;}
+    top:450px;
+    left:700px;}
 
 #middleSpark3{
     position:absolute;
     width: 100px;
     height: 75px;
-    bottom:145px;
-    right:200px;}
+    top:520px;
+    left:700px;}
 
 #middleSpark4{
     position:absolute;
     width: 100px;
     height: 75px;
-    bottom:75px;
-    right:200px;}
+    top:590px;
+    left:700px;}
 
 
 #rightSpark1{
     position:absolute;
     width: 100px;
     height: 75px;
-    bottom:285px;
-    right:50px;}
+    top:380px;
+    left:550px;}
 
 #rightSpark2{
     position:absolute;
     width: 100px;
     height: 75px;
-    bottom:215px;
-    right:50px;}
+    top:450px;
+    left:550px;}
 
 #rightSpark3{
     position:absolute;
     width: 100px;
     height: 75px;
-    bottom:145px;
-    right:50px;}
+    top:520px;
+    left:550px;}
 
 #rightSpark4{
     position:absolute;
     width: 100px;
     height: 75px;
-    bottom:75px;
-    right:50px;}
+    top:590px;
+    left:550px;}
 
 </style>
 
@@ -826,7 +827,7 @@ p {
             leftSpark("#leftSpark2","WicketsPerOver","bowl")
             leftSpark("#leftSpark3","TotalWickets","bowl")
             leftSpark("#leftSpark4","WicketsPerMatch","bowl")
-            leftSpark("#middleSpark1","AverageOfRunsScored","bat")
+            leftSpark("#middleSpark1","RunsScored","bat")
             leftSpark("#middleSpark2","BallsFaced","bat")
             leftSpark("#middleSpark3","StrikeRate","bat")
             leftSpark("#middleSpark4","NotOuts","bat")
@@ -1120,7 +1121,7 @@ p {
         leftSpark("#leftSpark2","WicketsPerOver","bowl")
         leftSpark("#leftSpark3","TotalWickets","bowl")
         leftSpark("#leftSpark4","WicketsPerMatch","bowl")
-        leftSpark("#middleSpark1","AverageOfRunsScored","bat")
+        leftSpark("#middleSpark1","RunsScored","bat")
         leftSpark("#middleSpark2","BallsFaced","bat")
         leftSpark("#middleSpark3","StrikeRate","bat")
         leftSpark("#middleSpark4","NotOuts","bat")

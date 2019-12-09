@@ -251,6 +251,9 @@ p {
 <div id="teamFilterTitle">
     <div>Select a team:</div>
 </div>
+<div id="about">
+    <a href="about.html">About</a>
+</div>
 
 <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
@@ -263,7 +266,10 @@ p {
 
 
 <script type="text/javascript">
-
+    var d = document.getElementById('about');
+    d.style.position = "absolute";
+    d.style.right = 100+'px';
+    d.style.top = 15+'px';
 
 
     var fieldSVGHeight = 600;

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cricket!</title>
+</head>
+<body>
+<style>
+
+    #yearFilterSelection{
+        position:absolute;
+        bottom:70px;
+        left:150px;}
+
+    #batMeasureFilterSelection{
+        position:absolute;
+        bottom:70px;
+        left:210px;}
+
+    #bowlMeasureFilterSelection{
+        position:absolute;
+        bottom:70px;
+        left:380px;}
+
+    #yearFilterTitle{
+        position:absolute;
+        bottom:90px;
+        left:150px;
+        font-family: sans-serif;
+        font-size: 12px;}
+
+    #batMeasureFilterTitle{
+        position:absolute;
+        bottom:90px;
+        left:210px;
+        font-family: sans-serif;
+        font-size: 12px;}
+
+    #bowlMeasureFilterTitle{
+        position:absolute;
+        bottom:90px;
+        left:380px;
+        font-family: sans-serif;
+        font-size: 12px;}
+
+    #teamFilterSelection{
+        position:absolute;
+        top:45px;
+        left:225px;
+        font-family: sans-serif;
+        font-size: 18px;
+    }
+
+    #teamFilterTitle{
+        position:absolute;
+        top:45px;
+        left:100px;
+        font-family: sans-serif;
+        font-size: 18px;}
+
+    p {
+        text-align:center;
+        font-family: sans-serif;
+        font-size: 18px;
+        border-bottom: 3px double;
+    }
+    #content img {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+    }
+
+
+    #area5{
+        position:absolute;
+        bottom:30px;
+        left:5px;}
+
+
+
+    #scatterMeasureFilterSelection{
+        position:absolute;
+        bottom:325px;
+        left:850px;}
+
+    #scatterPlot{
+        position:absolute;
+        bottom:45px;
+        left:550px;}
+
+    #leftSpark1{
+        position:absolute;
+        width: 100px;
+        height: 75px;
+        bottom:310px;
+        left:550px;}
+
+    #leftSpark2{
+        position:absolute;
+        width: 100px;
+        height: 75px;
+        bottom:240px;
+        left:550px;}
+
+    #leftSpark3{
+        position:absolute;
+        width: 100px;
+        height: 75px;
+        bottom:170px;
+        left:550px;}
+
+    #leftSpark4{
+        position:absolute;
+        width: 100px;
+        height: 75px;
+        bottom:100px;
+        left:550px;}
+
+    #scatterPlotTitle{
+        position:absolute;
+        bottom:360px;
+        left:585px;
+        font-family: sans-serif;
+        font-size: 18px;}
+
+</style>
+
+
+<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+
+<div class="container" id="leftSpark1"></div>
+<div class="container" id="leftSpark2"></div>
+<div class="container" id="leftSpark3"></div>
+<div class="container" id="leftSpark4"></div>
+
+
+<script type="text/javascript">
+
+    d3.csv("cricketPivot.csv", function(cricketdummy){
+
+
+
+// Parse the date / time
+        function leftSpark(divElement,sparkMeasure) {
+
+            var margin = {top: 20, right: 5, bottom: 70, left: 5},
+                width = 150,
+                height = 50 ;
+
+            filteredToMeasure = cricketdummy.filter(function(d){return d.MeasureName == sparkMeasure;});
+            filteredToMeasure.forEach(function (d) {
+                d.Year = d.Year;
+                d.MeasureValue = +d.MeasureValue;
+            });
+
+            var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
+
+            var y = d3.scale.linear().range([height, 0]);
+            var xAxis = d3.svg.axis()
+                .scale(x)
+                .orient("bottom")
+            var yAxis = d3.svg.axis()
+                .scale(y)
+                .orient("left")
+                .ticks(10);
+
+            var svg = d3.select(divElement).append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+
+            x.domain(filteredToMeasure.map(function (d) {
+                return d.Year;
+            }));
+            y.domain([0, d3.max(filteredToMeasure, function (d) {
+                return d.MeasureValue;
+            })]);
+
+            svg.selectAll("bar")
+                .data(filteredToMeasure)
+                .enter().append("rect")
+                .style("fill", "steelblue")
+                .attr("x", function (d) {
+                    return x(d.Year);
+                })
+                .attr("width", x.rangeBand() * .9)
+                .attr("y", function (d) {
+                    return y(d.MeasureValue);
+                })
+                .attr("height", function (d) {
+                    return height - y(d.MeasureValue);
+                });
+
+            svg.append("g")
+                .attr("class", "y axis")
+                .call(yAxis)
+                .append("text")
+                .attr("transform", "rotate(0)")
+                .attr("y", 6)
+                .attr("dy", "-.55em")
+                .style("text-anchor", "start")
+                .text(sparkMeasure);
+        }
+        leftSpark("#leftSpark1","BowlingEconomy")
+        leftSpark("#leftSpark2","WicketsPerOver")
+        leftSpark("#leftSpark3","TotalWickets")
+        leftSpark("#leftSpark4","WicketsPerMatch")
+
+    });
+
+
+
+</script>
+</body>
+</html>

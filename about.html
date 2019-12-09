@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+
+        #yearFilterSelection{
+            position:absolute;
+            bottom:70px;
+            left:150px;}
+
+        #batMeasureFilterSelection{
+            position:absolute;
+            bottom:70px;
+            left:210px;}
+
+        #bowlMeasureFilterSelection{
+            position:absolute;
+            bottom:70px;
+            left:320px;}
+
+        #yearFilterTitle{
+            position:absolute;
+            bottom:90px;
+            left:150px;
+            font-family: sans-serif;
+            font-size: 12px;}
+
+        #batMeasureFilterTitle{
+            position:absolute;
+            bottom:90px;
+            left:210px;
+            font-family: sans-serif;
+            font-size: 12px;}
+
+        #bowlMeasureFilterTitle{
+            position:absolute;
+            bottom:90px;
+            left:320px;
+            font-family: sans-serif;
+            font-size: 12px;}
+
+        #teamFilterSelection{
+            position:absolute;
+            top:45px;
+            left:225px;
+            font-family: sans-serif;
+            font-size: 18px;
+        }
+
+        #teamFilterTitle{
+            position:absolute;
+            top:45px;
+            left:100px;
+            font-family: sans-serif;
+            font-size: 18px;}
+
+        p {
+            text-align:center;
+            font-family: sans-serif;
+            font-size: 18px;
+            border-bottom: 3px double;
+        }
+        #content img {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+        }
+
+
+        #area5{
+            position:absolute;
+            bottom:30px;
+            left:5px;}
+
+
+
+        #scatterMeasureFilterSelection{
+            position:absolute;
+            top:375px;
+            left:1070px;}
+
+        #scatterPlot{
+            position:absolute;
+            top:360px;
+            left:990px;}
+
+        #scatterPlotTitle{
+            position:absolute;
+            top:350px;
+            left:1025px;
+            font-family: sans-serif;
+            font-size: 18px;}
+
+        #sparkLinesTitle{
+            position:absolute;
+            top:350px;
+            left:550px;
+            font-family: sans-serif;
+            font-size: 18px;}
+
+        #leftSpark1{
+            position:absolute;
+            width: 100px;
+            height: 75px;
+            top:380px;
+            left:850px;}
+
+        #leftSpark2{
+            position:absolute;
+            width: 100px;
+            height: 75px;
+            top:450px;
+            left:850px;}
+
+        #leftSpark3{
+            position:absolute;
+            width: 100px;
+            height: 75px;
+            top:520px;
+            left:850px;}
+
+        #leftSpark4{
+            position:absolute;
+            width: 100px;
+            height: 75px;
+            top:590px;
+            left:850px;}
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: black;
+            shape-rendering: crispEdges;
+        }
+
+
+
+    </style>
+    <title>Trevor Toll's Project 1: H517 Visualization Design, Analysis,
+        & Evaluation</title>
+
+
+
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+</head>
+
+<body>
+
+
+
+<div id="content">
+    <img src="ipl.png" class="ribbon" width="75"/>
+    <div><p> Project 2 for H517 Visualization Design, Analysis,
+        & Evaluation</p></div>
+</div>
+
+<div id="about">
+    <a href="cricket.html">Cricket</a>
+</div>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/acPEdp2UStg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h1>Design Thought Process</h1>
+<h2>Original Design</h2>
+Seen below is our original design. Our goal was to create a visualization that was simple and informative enough to engage someone who knows nothing about cricket but also provide in depth analysis for fans of cricket. Coming out of our initial design session, we knew that portraying the field itself would be critical in setting the context for our audience as many have likely not seen a field before. Also, our users likely are not aware of the different standings a team might end with. So to address that, the top right has an ordinal ranking of the possible outcomes of a team's cricket season. Our group goal was, once armed with the first two context visualizations of the cricket field and the possible season results, our users have an idea of what a cricket field is and what the most desirable season outcomes are. Once the user has this context, additional supporting visuals should allow them to explore the metrics tracked for cricket teams and begin to answer questions like: Which stats are important for a winning cricket team? Which stats correlate with winning matches? How has a team improved or worsened over time? Also, in which statistical categories has the team improved or worsened over time.
+<img src="designSessionDoc.png" class="ribbon"/>
+<h2>Cricket Field</h2>
+As previously mentioned, the field itself is what sets the context of the dashboard. The target audience is likely one that would be familiar with a baseball field so the color encodings of green for grass and tan for a sandy area should clue our user in that this is the field that cricket is played on.
+<br><br>
+Two primary activities take place in a cricket match: batting and bowling. Therefore, the space where these two activities occur is labeled on the cricket field. Within batting and bowling there are several relevant statistics that are important. To help the user with context, the performance in each stat is encoded based on the team's performance relative to other teams in the league during the same season.
+<br><br>
+Colors for encoding performance were chosen starting with Color Brewer. We had four categories to encode in a diverging fashion that had to be overlaid on top of a green field. After trying some different options in from Color Brewer, the blue to red diverging scheme felt the most intuitive.
+<br><br>
+
+
+<h2>Ordinal Season Result</h2>
+<br><br>
+
+
+<h2>Measure Spark Lines by Season</h2>
+We knew that we wanted our users to be presented with the different measure possibilities without only having the option to select them in filters. We also had a limited amount of space and many measures. Therefore, we chose small bar charts to represent the performance over time encoded with the same colors as the field. The user may hover over any measure and it will change the field to encode by the measure that they hovered over; the hover will change the season filter as well.
+<br><br>
+
+<h2>Scatter Plot</h2>
+As a group we wanted a user to be able to see how different team metrics correlated with success. Therefore, we created a scatter plot that plots a measure on the y-axis and the number of matches one and plots each season. This visual allows the user to explore the different metrics and their correlation with success. Also, the scatter shares the same encodings.
+<br><br>
+
+
+<h1>Findings using the visualization:</h1>
+
+<br>
+<img src="finding1.png" />
+<br><br>
+<br>
+<img src="finding2.png" />
+<br><br>
+
+<br>
+<img src="finding3.png" />
+<script type="text/javascript">
+
+    var d = document.getElementById('about');
+    d.style.position = "absolute";
+    d.style.right = 100+'px';
+    d.style.top = 15+'px';
+</script>
+
+</body>
+</html>

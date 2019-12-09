@@ -1,0 +1,145 @@
+[
+	{
+		"Time": "2008",
+		"Rajasthan Royals":1,
+		"Chennai Super Kings": 2,
+		"Mumbai Indians": 5,
+		"Delhi Capitals": 4,
+		"Kings Xi Punjab":3,
+		"Kolkata Knight Riders": 6,
+		"Royal Challengers Bangalore":7,
+		"Sunrisers Hyderabad":8	
+	},
+	{
+		"Time": "2009",
+		"Rajasthan Royals":6,
+		"Chennai Super Kings": 4,
+		"Mumbai Indians": 7,
+		"Delhi Capitals": 3,
+		"Kings Xi Punjab":5,
+		"Kolkata Knight Riders": 8,
+		"Royal Challengers Bangalore":2,
+		"Sunrisers Hyderabad":1	
+
+	},
+	{
+		"Time": "2010",
+		"Rajasthan Royals":7,
+		"Chennai Super Kings": 1,
+		"Mumbai Indians": 2,
+		"Delhi Capitals": 5,
+		"Kings Xi Punjab":8,
+		"Kolkata Knight Riders": 6,
+		"Royal Challengers Bangalore":4,
+		"Sunrisers Hyderabad":3	
+
+	},
+	{
+		"Time": "2011",
+		"Rajasthan Royals":6,
+		"Chennai Super Kings": 1,
+		"Mumbai Indians": 3,
+		"Delhi Capitals": 8,
+		"Kings Xi Punjab":5,
+		"Kolkata Knight Riders": 4,
+		"Royal Challengers Bangalore":2,
+		"Sunrisers Hyderabad":7	
+
+	},
+	{
+		"Time": "2012",
+		"Rajasthan Royals":7,
+		"Chennai Super Kings": 2,
+		"Mumbai Indians": 4,
+		"Delhi Capitals": 3,
+		"Kings Xi Punjab":6,
+		"Kolkata Knight Riders": 1,
+		"Royal Challengers Bangalore":5,
+		"Sunrisers Hyderabad":8	
+
+	},
+	{
+		"Time": "2013",
+		"Rajasthan Royals":3,
+		"Chennai Super Kings": 2,
+		"Mumbai Indians": 1,
+		"Delhi Capitals": 8,
+		"Kings Xi Punjab":6,
+		"Kolkata Knight Riders": 7,
+		"Royal Challengers Bangalore":5,
+		"Sunrisers Hyderabad":4	
+
+	},
+	{
+		"Time": "2014",
+		"Rajasthan Royals":5,
+		"Chennai Super Kings": 3,
+		"Mumbai Indians": 4,
+		"Delhi Capitals": 8,
+		"Kings Xi Punjab":2,
+		"Kolkata Knight Riders": 1,
+		"Royal Challengers Bangalore":7,
+		"Sunrisers Hyderabad":6	
+
+	},
+	{
+		"Time": "2015",
+		"Rajasthan Royals":4,
+		"Chennai Super Kings": 2,
+		"Mumbai Indians": 1,
+		"Delhi Capitals": 7,
+		"Kings Xi Punjab":8,
+		"Kolkata Knight Riders": 5,
+		"Royal Challengers Bangalore":3,
+		"Sunrisers Hyderabad":6	
+
+	},
+	{
+		"Time": "2016",
+		"Gujrat Lions":3,
+		"Rising Pune Supergiants": 7,
+		"Mumbai Indians": 5,
+		"Delhi Capitals": 6,
+		"Kings Xi Punjab":8,
+		"Kolkata Knight Riders": 4,
+		"Royal Challengers Bangalore":2,
+		"Sunrisers Hyderabad":1	
+
+	},
+	{
+		"Time": "2017",
+		"Gujrat Lions":7,
+		"Rising Pune Supergiants": 2,
+		"Mumbai Indians": 1,
+		"Delhi Capitals": 6,
+		"Kings Xi Punjab":5,
+		"Kolkata Knight Riders": 4,
+		"Royal Challengers Bangalore":8,
+		"Sunrisers Hyderabad":3	
+
+	},
+	{
+		"Time": "2018",
+		"Rajasthan Royals":4,
+		"Chennai Super Kings": 1,
+		"Mumbai Indians": 8,
+		"Delhi Capitals": 5,
+		"Kings Xi Punjab":7,
+		"Kolkata Knight Riders": 3,
+		"Royal Challengers Bangalore":6,
+		"Sunrisers Hyderabad":2	
+	},
+	{
+		"Time": "2019",
+		"Rajasthan Royals":7,
+		"Chennai Super Kings": 2,
+		"Mumbai Indians": 1,
+		"Delhi Capitals": 3,
+		"Kings Xi Punjab":6,
+		"Kolkata Knight Riders": 5,
+		"Royal Challengers Bangalore":8,
+		"Sunrisers Hyderabad":4	
+	}
+
+	
+]

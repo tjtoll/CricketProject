@@ -17,36 +17,36 @@
 #yearFilterSelection{
     position:absolute;
     top:650px;
-    left:150px;}
+    left:125px;}
 
 #batMeasureFilterSelection{
     position:absolute;
     top:650px;
-    left:210px;}
+    left:185px;}
 
 #bowlMeasureFilterSelection{
     position:absolute;
     top:650px;
-    left:320px;}
+    left:295px;}
 
 #yearFilterTitle{
     position:absolute;
     top:630px;
-    left:150px;
+    left:125px;
     font-family: sans-serif;
     font-size: 12px;}
 
 #batMeasureFilterTitle{
     position:absolute;
     top:630px;
-    left:210px;
+    left:185px;
     font-family: sans-serif;
     font-size: 12px;}
 
 #bowlMeasureFilterTitle{
     position:absolute;
     top:630px;
-    left:320px;
+    left:295px;
     font-family: sans-serif;
     font-size: 12px;}
 
@@ -80,8 +80,8 @@ p {
 
 #area5{
     position:absolute;
-    top:30px;
-    left:450px;}
+    top:100px;
+    left:500px;}
 
 
 
@@ -204,8 +204,8 @@ p {
 
 #saketChartTop {
     position: absolute;
-    top: 50px;
-    left: 600px;
+    top: 75px;
+    left: 675px;
 }
 
 
@@ -531,7 +531,6 @@ p {
         // aggregating the bat score data by year
         filteredToYear = cricketdummy.filter(function(d){return d.Year == selectedOption;});
         var batScore = aggregateData()
-        console.log(batScore);
         var batScoreColor = getBatScoreColor(batScore)
         var bowlScoreColor = getBowlScoreColor(batScore)
 
@@ -860,7 +859,8 @@ p {
             d3.select("#batScoreAreaLabelSd").transition().duration(500).text("League Std Dev: "+(batScore[0].values.BatScoreAggSd).toFixed(1));
             d3.select("#ScatterPlotSVG").remove();
             drawScatterPlot()
-
+            d3.select("#saketChart").remove();
+            seasonOutcome()
             d3.selectAll("#Sparkline").remove();
 
             leftSpark("#leftSpark1","BowlingEconomy","bowl")
@@ -883,7 +883,6 @@ p {
 
         function drawScatterPlot() {
             var scatterData = aggregateDataScatter()
-            console.log(scatterData)
             var margin = {top: 20, right: 20, bottom: 30, left: 40},
                 width = 500 - margin.left - margin.right,
                 height = 325 - margin.top - margin.bottom;
@@ -978,7 +977,6 @@ p {
 
                     d3.select('#yearFilterSelection').property('value', d.key);
                     var yearSelection = d.key
-                    console.log(yearSelection)
 
                     d3.csv("cricketPivot.csv", function(cricketdummy){
 
@@ -1103,7 +1101,6 @@ p {
 
                     d3.select('#yearFilterSelection').property('value', d.key);
                     var yearSelection = d.key
-                    console.log(yearSelection)
 
                     if (measureType == "bat") {d3.select('#batMeasureFilterSelection').property('value', sparkMeasure);}
                     if (measureType == "bowl") {d3.select('#bowlMeasureFilterSelection').property('value', sparkMeasure);}
@@ -1173,11 +1170,12 @@ p {
 
         function seasonOutcome() {
             var saketChart = d3.select("#saketChartTop").append("svg")
-                .attr("width", 960)
+                .attr("id","saketChart")
+                .attr("width", 800)
                 .attr("height", 250);
 
 // Draw a line chart
-            var margin = {top: 20, right: 150, bottom: 30, left: 50},
+            var margin = {top: 20, right: 175, bottom: 30, left: 50},
                 width = +saketChart.attr('width') - margin.left - margin.right,
                 height = +saketChart.attr('height') - margin.top - margin.bottom,
                 g = saketChart.append('g').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
@@ -1220,6 +1218,9 @@ p {
 
             // load the data
             d3.json("data.json", function (error, data) {
+
+                //cricketdummy.filter(function(d){return d.Year == selectedOption;});
+
                 // Select the important columns
                 color.domain(d3.keys(data[0]).filter(function (key) {
                     return key !== "Time" && key !== "_id";
@@ -1228,9 +1229,8 @@ p {
                 data.forEach(function (d) {
                     d.date = parseTime(d.Time);
                 });
-                console.log(data);
 
-                var pos = color.domain().map(function (name) {
+                var pos_initial = color.domain().map(function (name) {
                     return {
                         name: name,
                         values: data.map(function (d) {
@@ -1241,23 +1241,17 @@ p {
                         })
                     };
                 });
-                console.log(pos)
+                //console.log(pos)
+                var pos = pos_initial.filter(function(d){return d.name == d3.select("#teamFilterSelection").property("value")});
+                //console.log(filteredToTeam)
                 // Set the X domain
                 x.domain(d3.extent(data, function (d) {
                     return d.date;
                 }));
                 // Set the Y domain
                 y.domain([
-                    d3.min(pos, function (c) {
-                        return d3.min(c.values, function (v) {
-                            return v.worth;
-                        });
-                    }),
-                    d3.max(pos, function (c) {
-                        return d3.max(c.values, function (v) {
-                            return v.worth;
-                        });
-                    })
+                    1,
+                    8
                 ]);
                 // Set the X axis
                 g.append("g")

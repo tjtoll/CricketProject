@@ -1001,7 +1001,12 @@ p {
                         d3.select("#batScoreAreaLabelSd").transition().duration(500).text("League Std Dev: "+(batScore[0].values.BatScoreAggSd).toFixed(1));
                         d3.select("#seasonLabel").transition().duration(500).text(d3.select("#yearFilterSelection").property("value")+ " Season");
                     })
-                    drawSparkLines()
+                    d3.selectAll("#scatterUpdate").transition()
+                        .style("opacity", function(d) {if (d.key != yearSelection) {return hideOpacity} else {return 1.0}})
+                        .attr("r", function (d) {if (d.key == yearSelection) {return 16} else
+                        {return 7.5}});
+                    d3.selectAll("#SparklineBars").transition()
+                        .style("opacity", function(d) {if (d.key != yearSelection) {return hideOpacity} else {return 1.0}});
 
                 })
                 .on("mouseout", function(d) {
@@ -1010,6 +1015,14 @@ p {
                         .duration(500)
                         .attr('r',7.5)
                         .attr('stroke-width',1)
+
+
+                    d3.selectAll("#scatterUpdate").transition()
+                        .style("opacity", 1.0)
+                        .attr("r", 7.5);
+
+                    d3.selectAll("#SparklineBars").transition()
+                        .style("opacity", 1.0);
                 })
                 .append('title') // Tooltip
                 .text(function (d) { return d.key +

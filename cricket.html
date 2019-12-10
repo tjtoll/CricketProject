@@ -1022,7 +1022,7 @@ p {
 
                     d3.selectAll("#outcomeCircle").transition()
                     //.attr("r", function (dd) {if (dd.date.getFullYear() == d.key) {return 15} else {return 8}  })
-                        .attr("stroke-width", function (dd) {if (dd.date.getFullYear() == d.key) {return 3} else {return 1}  })
+                        .attr("stroke-width", 1)
                     d3.selectAll("#scatterUpdate").transition()
                         .style("opacity", 1.0)
                         .attr("r", 7.5);

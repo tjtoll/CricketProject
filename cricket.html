@@ -299,6 +299,12 @@ p {
     d.style.top = 15+'px';
 
 
+    var low2 = "#d7191c"
+    var low1 = "#fdae61"
+    var high1 = "#abd9e9"
+    var high2 = "#2c7bb6"
+    var hideOpacity = .1
+
     var fieldSVGHeight = 600;
     var scoreAreaOpacity = .60;
     var fieldSVGWidth = 500;
@@ -338,16 +344,16 @@ p {
                 .attr("r", 10)
                 .attr("fill", function (d, i) {
                     if (d.a == 1) {
-                        return "#0571b0"
+                        return high2
                     }
                     if (d.a == 2) {
-                        return "#92c5de"
+                        return high1
                     }
                     if (d.a == 4) {
-                        return "#ca0020"
+                        return low2
                     }
                     if (d.a == 3) {
-                        return "#f4a582"
+                        return low1
                     }
                     ;
                 });
@@ -487,16 +493,16 @@ p {
             var batScoreColor;
             // color is based on standard deviation
             if (batScore[0].values.BatScore > batScore[0].values.BatScoreAggSd + batScore[0].values.BatScoreAggAvg) {
-                batScoreColor = "#0571b0";
+                batScoreColor = high2;
             }
             else if (batScore[0].values.BatScore >= batScore[0].values.BatScoreAggAvg) {
-                batScoreColor = "#92c5de";
+                batScoreColor = high1;
             }
             else if (batScore[0].values.BatScore < batScore[0].values.BatScoreAggAvg-batScore[0].values.BatScoreAggSd) {
-                batScoreColor = "#ca0020";
+                batScoreColor = low2;
             }
             else if (batScore[0].values.BatScore <= batScore[0].values.BatScoreAggAvg) {
-                batScoreColor = "#f4a582";
+                batScoreColor = low1;
             }
             return batScoreColor
         }
@@ -505,16 +511,16 @@ p {
             var BowlScoreColor;
             // color is based on standard deviation
             if (batScore[0].values.BowlScore > batScore[0].values.BowlScoreAggSd + batScore[0].values.BowlScoreAggAvg) {
-                BowlScoreColor = "#0571b0";
+                BowlScoreColor = high2;
             }
             else if (batScore[0].values.BowlScore >= batScore[0].values.BowlScoreAggAvg) {
-                BowlScoreColor = "#92c5de";
+                BowlScoreColor = high1;
             }
             else if (batScore[0].values.BowlScore <  batScore[0].values.BowlScoreAggAvg-batScore[0].values.BowlScoreAggSd) {
-                BowlScoreColor = "#ca0020";
+                BowlScoreColor = low2;
             }
             else if (batScore[0].values.BowlScore <= batScore[0].values.BowlScoreAggAvg) {
-                BowlScoreColor = "#f4a582";
+                BowlScoreColor = low1;
             }
             return BowlScoreColor
         }
@@ -523,16 +529,16 @@ p {
             var FieldingScoreColor;
             // color is based on standard deviation
             if (batScore[0].values.FieldingScore > batScore[0].values.FieldingScoreAggSd + batScore[0].values.FieldingScoreAggAvg) {
-                FieldingScoreColor = "#0571b0";
+                FieldingScoreColor = high2;
             }
             else if (batScore[0].values.FieldingScore >= batScore[0].values.FieldingScoreAggAvg) {
-                FieldingScoreColor = "#92c5de";
+                FieldingScoreColor = high1;
             }
             else if (batScore[0].values.FieldingScore < batScore[0].values.FieldingScoreAggAvg-batScore[0].values.FieldingScoreAggSd ) {
-                FieldingScoreColor = "#ca0020";
+                FieldingScoreColor = low2;
             }
             else if (batScore[0].values.FieldingScore <= batScore[0].values.FieldingScoreAggAvg) {
-                FieldingScoreColor = "#f4a582";
+                FieldingScoreColor = low1;
             }
             return FieldingScoreColor
 
@@ -953,18 +959,17 @@ p {
                 .attr("cx", xMap)
                 .attr("cy", yMap)
                 .style("fill", function (d) {
-                    if (d.key == d3.select("#yearFilterSelection").property("value")) {return "orange"}
                     if (d.values.ScatterMeasure > d.values.ScatterMeasureAggSd + d.values.ScatterMeasureAggAvg) {
-                        return  "#0571b0";
+                        return  high2;
                     }
                     else if (d.values.ScatterMeasure >= d.values.ScatterMeasureAggAvg) {
-                        return "#92c5de";
+                        return high1;
                     }
                     else if (d.values.ScatterMeasure < d.values.ScatterMeasureAggAvg-d.values.ScatterMeasureAggSd ) {
-                        return "#ca0020";
+                        return low2;
                     }
                     else if (d.values.ScatterMeasure <= d.values.ScatterMeasureAggAvg) {
-                        return "#f4a582";
+                        return low1;
                     }
                 })
                 .on("mouseover", function(d) {
@@ -1069,19 +1074,19 @@ p {
             svg.selectAll("bar")
                 .data(dataAggregation)
                 .enter().append("rect")
+                .attr("id","SparklineBars")
                 .style("fill", function (d) {
-                     if (d.key == d3.select("#yearFilterSelection").property("value")) {return "orange"}
                      if (d.values.BatScore > d.values.BatScoreAggSd + d.values.BatScoreAggAvg) {
-                         return  "#0571b0";
+                         return  high2;
                      }
                      else if (d.values.BatScore >= d.values.BatScoreAggAvg) {
-                         return "#92c5de";
+                         return high1;
                      }
                      else if (d.values.BatScore < d.values.BatScoreAggAvg-d.values.BatScoreAggSd ) {
-                         return "#ca0020";
+                         return low2;
                      }
                      else if (d.values.BatScore <= d.values.BatScoreAggAvg) {
-                         return "#f4a582";
+                         return low1;
                      }
                  })
                 .attr("x", function (d) {
@@ -1095,13 +1100,19 @@ p {
                     return height - y(d.values.BatScore);
                 })
                 .on("mouseover", function(d) {
-                    d3.select(this)
-                        .transition()
-                        .duration(250)
-                        .style("fill","orange")
+
+
+
 
                     d3.select('#yearFilterSelection').property('value', d.key);
                     var yearSelection = d.key
+
+                    d3.selectAll("#scatterUpdate").transition()
+                        .style("opacity", function(d) {if (d.key != yearSelection) {return hideOpacity} else {return 1.0}})
+                        .attr("r", function (d) {if (d.key == yearSelection) {return 16} else
+                        {return 7.5}});
+                    d3.selectAll("#SparklineBars").transition()
+                        .style("opacity", function(d) {if (d.key != yearSelection) {return hideOpacity} else {return 1.0}});
 
                     if (measureType == "bat") {d3.select('#batMeasureFilterSelection').property('value', sparkMeasure);}
                     if (measureType == "bowl") {d3.select('#bowlMeasureFilterSelection').property('value', sparkMeasure);}
@@ -1125,8 +1136,6 @@ p {
 
                     })
 
-                    d3.select("#ScatterPlotSVG").remove();
-                    drawScatterPlot()
                 })
                 .on("mouseout", function(d) {
                     d3.select(this)
@@ -1134,18 +1143,26 @@ p {
                         .duration(500)
                         .style("fill", function (d) {
                             if (d.values.BatScore > d.values.BatScoreAggSd + d.values.BatScoreAggAvg) {
-                                return  "#0571b0";
+                                return  high2;
                             }
                             else if (d.values.BatScore >= d.values.BatScoreAggAvg) {
-                                return "#92c5de";
+                                return high1;
                             }
                             else if (d.values.BatScore < d.values.BatScoreAggAvg-d.values.BatScoreAggSd) {
-                                return "#ca0020";
+                                return low2;
                             }
                             else if (d.values.BatScore <= d.values.BatScoreAggAvg) {
-                                return "#f4a582";
+                                return low1;
                             }
                         })
+
+
+                    d3.selectAll("#scatterUpdate").transition()
+                        .style("opacity", 1.0)
+                        .attr("r", 7.5);
+
+                    d3.selectAll("#SparklineBars").transition()
+                        .style("opacity", 1.0);
                 })
 
             svg.append("g")
@@ -1345,7 +1362,7 @@ p {
 
                 mousePerLine.append("circle")
                     .attr("r", 9)
-                    .style("stroke", "orange")
+                    .style("stroke", "green")
                     .style("fill", "none")
                     .style("stroke-width", "3px")
                     .style("opacity", "0");
@@ -1369,6 +1386,13 @@ p {
                             .style("opacity", "0");
                         d3.selectAll(".mouse-per-line text")
                             .style("opacity", "0");
+
+                        d3.selectAll("#scatterUpdate").transition()
+                            .style("opacity", 1.0)
+                            .attr("r", 7.5);
+
+                        d3.selectAll("#SparklineBars").transition()
+                            .style("opacity", 1.0);
                     })
                     .on('mouseover', function (d) { // on mouse in show line, circles and text
                         d3.select(".mouse-line")
@@ -1379,8 +1403,7 @@ p {
                             .style("opacity", "1");
 
 
-                                            }
-
+                                     }
 
                     )
                     .on('mousemove', function (d,i) { // mouse moving over canvas
@@ -1412,9 +1435,16 @@ p {
                         console.log(pos)
                         var yearSelection = (d.values[idx].date.getFullYear());
                         console.log(yearSelection);
-                        drawSparkLines()
-                        d3.select("#ScatterPlotSVG").remove();
-                        drawScatterPlot()
+                        //drawSparkLines()
+
+
+                        d3.selectAll("#scatterUpdate").transition()
+                            .style("opacity", function(d) {if (d.key != yearSelection) {return hideOpacity} else {return 1.0}})
+                            .attr("r", function (d) {if (d.key == yearSelection) {return 16} else
+                            {return 7.5}});
+                        d3.selectAll("#SparklineBars").transition()
+                            .style("opacity", function(d) {if (d.key != yearSelection) {return hideOpacity} else {return 1.0}});
+
 
                         d3.csv("cricketPivot.csv", function(cricketdummy){
 

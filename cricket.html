@@ -424,6 +424,7 @@ p {
             .text(function(d){return d;})
             .attr("value",function(d){return d;});
         // changing the area scores based on the year selection
+        d3.select('#teamFilterSelection').property('value', 'Sunrisers Hyderabad');
 
         function aggregateData(){
             //#batMeasureFilterSelection
@@ -869,20 +870,8 @@ p {
             drawScatterPlot()
             d3.select("#saketChart").remove();
             seasonOutcome()
-            d3.selectAll("#Sparkline").remove();
 
-            leftSpark("#leftSpark1","BowlingEconomy","bowl")
-            leftSpark("#leftSpark2","WicketsPerOver","bowl")
-            leftSpark("#leftSpark3","TotalWickets","bowl")
-            leftSpark("#leftSpark4","WicketsPerMatch","bowl")
-            leftSpark("#middleSpark1","RunsScored","bat")
-            leftSpark("#middleSpark2","BallsFaced","bat")
-            leftSpark("#middleSpark3","StrikeRate","bat")
-            leftSpark("#middleSpark4","NotOuts","bat")
-            leftSpark("#rightSpark1","100s","bat")
-            leftSpark("#rightSpark2","50s","bat")
-            leftSpark("#rightSpark3","4s","bat")
-            leftSpark("#rightSpark4","6s","bat")
+            drawSparkLines()
 
         });
         drawCricketField();
@@ -959,10 +948,12 @@ p {
                 .enter().append("circle")
                 .attr("id","scatterUpdate")
                 .attr("class", "dot")
-                .attr("r", 7.5)
+                .attr("r", function (d) {if (d.key == d3.select("#yearFilterSelection").property("value")) {return 10} else
+                    {return 7.5}})
                 .attr("cx", xMap)
                 .attr("cy", yMap)
                 .style("fill", function (d) {
+                    if (d.key == d3.select("#yearFilterSelection").property("value")) {return "orange"}
                     if (d.values.ScatterMeasure > d.values.ScatterMeasureAggSd + d.values.ScatterMeasureAggAvg) {
                         return  "#0571b0";
                     }
@@ -1005,6 +996,7 @@ p {
                         d3.select("#batScoreAreaLabelSd").transition().duration(500).text("League Std Dev: "+(batScore[0].values.BatScoreAggSd).toFixed(1));
                         d3.select("#seasonLabel").transition().duration(500).text(d3.select("#yearFilterSelection").property("value")+ " Season");
                     })
+                    drawSparkLines()
 
                 })
                 .on("mouseout", function(d) {
@@ -1077,7 +1069,8 @@ p {
             svg.selectAll("bar")
                 .data(dataAggregation)
                 .enter().append("rect")
-                 .style("fill", function (d) {
+                .style("fill", function (d) {
+                     if (d.key == d3.select("#yearFilterSelection").property("value")) {return "orange"}
                      if (d.values.BatScore > d.values.BatScoreAggSd + d.values.BatScoreAggAvg) {
                          return  "#0571b0";
                      }
@@ -1131,6 +1124,9 @@ p {
                         d3.select("#batScoreAreaLabelSd").transition().duration(500).text("League Std Dev: "+(batScore[0].values.BatScoreAggSd).toFixed(1));
 
                     })
+
+                    d3.select("#ScatterPlotSVG").remove();
+                    drawScatterPlot()
                 })
                 .on("mouseout", function(d) {
                     d3.select(this)
@@ -1163,18 +1159,23 @@ p {
                 .style("font-size", "12")
                 .text(sparkMeasure);
         }
-        leftSpark("#leftSpark1","BowlingEconomy","bowl")
-        leftSpark("#leftSpark2","WicketsPerOver","bowl")
-        leftSpark("#leftSpark3","TotalWickets","bowl")
-        leftSpark("#leftSpark4","WicketsPerMatch","bowl")
-        leftSpark("#middleSpark1","RunsScored","bat")
-        leftSpark("#middleSpark2","BallsFaced","bat")
-        leftSpark("#middleSpark3","StrikeRate","bat")
-        leftSpark("#middleSpark4","NotOuts","bat")
-        leftSpark("#rightSpark1","100s","bat")
-        leftSpark("#rightSpark2","50s","bat")
-        leftSpark("#rightSpark3","4s","bat")
-        leftSpark("#rightSpark4","6s","bat")
+        function drawSparkLines() {
+            d3.selectAll("#Sparkline").remove();
+
+            leftSpark("#leftSpark1", "BowlingEconomy", "bowl")
+            leftSpark("#leftSpark2", "WicketsPerOver", "bowl")
+            leftSpark("#leftSpark3", "TotalWickets", "bowl")
+            leftSpark("#leftSpark4", "WicketsPerMatch", "bowl")
+            leftSpark("#middleSpark1", "RunsScored", "bat")
+            leftSpark("#middleSpark2", "BallsFaced", "bat")
+            leftSpark("#middleSpark3", "StrikeRate", "bat")
+            leftSpark("#middleSpark4", "NotOuts", "bat")
+            leftSpark("#rightSpark1", "4s", "bat")
+            leftSpark("#rightSpark2", "6s", "bat")
+            leftSpark("#rightSpark3", "100s", "bat")
+            leftSpark("#rightSpark4", "50s", "bat")
+        }
+        drawSparkLines()
 
         function seasonOutcome() {
             var saketChart = d3.select("#saketChartTop").append("svg")
@@ -1287,9 +1288,7 @@ p {
                     .attr("d", function (d) {
                         return line(d.values);
                     })
-                    .style("stroke", function (d) {
-                        return color(d.name);
-                    });
+                    .style("stroke", "green");
                 // Add the circles
                 po.append("g").selectAll("circle")
                     .data(function (d) {
@@ -1305,9 +1304,7 @@ p {
                         return y(dd.worth)
                     })
                     .attr("fill", "none")
-                    .attr("stroke", function (d) {
-                        return color(this.parentNode.__data__.name)
-                    })
+                    .attr("stroke", "green")
 
                 // Add label to the end of the line
                 po.append("text")
@@ -1347,12 +1344,10 @@ p {
 
 
                 mousePerLine.append("circle")
-                    .attr("r", 7)
-                    .style("stroke", function (d) {
-                        return color(d.name);
-                    })
+                    .attr("r", 9)
+                    .style("stroke", "orange")
                     .style("fill", "none")
-                    .style("stroke-width", "2px")
+                    .style("stroke-width", "3px")
                     .style("opacity", "0");
 
                 mousePerLine.append("text")
@@ -1417,6 +1412,9 @@ p {
                         console.log(pos)
                         var yearSelection = (d.values[idx].date.getFullYear());
                         console.log(yearSelection);
+                        drawSparkLines()
+                        d3.select("#ScatterPlotSVG").remove();
+                        drawScatterPlot()
 
                         d3.csv("cricketPivot.csv", function(cricketdummy){
 

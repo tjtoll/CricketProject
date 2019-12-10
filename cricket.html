@@ -104,7 +104,7 @@ p {
 
     #saketPlotTitle{
         position:absolute;
-        top:75px;
+        top:70px;
         left:720px;
         font-family: sans-serif;
         font-size: 18px;}
@@ -1297,7 +1297,7 @@ p {
                     })
                     .enter()
                     .append("circle")
-                    .attr("r", 2)
+                    .attr("r", 8)
                     .attr("cx", function (dd) {
                         return x(dd.date)
                     })
@@ -1307,7 +1307,8 @@ p {
                     .attr("fill", "none")
                     .attr("stroke", function (d) {
                         return color(this.parentNode.__data__.name)
-                    });
+                    })
+
                 // Add label to the end of the line
                 po.append("text")
                     .attr("class", "label")
@@ -1344,6 +1345,7 @@ p {
                     .append("g")
                     .attr("class", "mouse-per-line");
 
+
                 mousePerLine.append("circle")
                     .attr("r", 7)
                     .style("stroke", function (d) {
@@ -1360,6 +1362,7 @@ p {
 
 // Append a rect to catch mouse movements on canvas
                 mouseG.append('svg:rect')
+                    .data(pos)
                     .attr('width', width)
                     .attr('height', height)
                     .attr('fill', 'none')
@@ -1372,15 +1375,20 @@ p {
                         d3.selectAll(".mouse-per-line text")
                             .style("opacity", "0");
                     })
-                    .on('mouseover', function () { // on mouse in show line, circles and text
+                    .on('mouseover', function (d) { // on mouse in show line, circles and text
                         d3.select(".mouse-line")
                             .style("opacity", "1");
                         d3.selectAll(".mouse-per-line circle")
                             .style("opacity", "1");
                         d3.selectAll(".mouse-per-line text")
                             .style("opacity", "1");
-                    })
-                    .on('mousemove', function () { // mouse moving over canvas
+
+
+                                            }
+
+
+                    )
+                    .on('mousemove', function (d,i) { // mouse moving over canvas
                         var mouse = d3.mouse(this);
 
                         d3.selectAll(".mouse-per-line")
@@ -1403,6 +1411,35 @@ p {
                                     });
                                 return "translate(" + x(d.values[idx].date) + "," + y(d.values[idx].worth) + ")";
                             });
+
+
+                        d3.select('#yearFilterSelection').property('value', (d.values[idx].date.getFullYear()));
+                        console.log(pos)
+                        var yearSelection = (d.values[idx].date.getFullYear());
+                        console.log(yearSelection);
+
+                        d3.csv("cricketPivot.csv", function(cricketdummy){
+
+                            filteredToYear  = cricketdummy.filter(function(d){return d.Year == yearSelection;});
+                            var batScore = aggregateData();
+                            var batScoreColor = getBatScoreColor(batScore);
+                            var bowlScoreColor = getBowlScoreColor(batScore);
+                            var FieldingScoreColor = getFieldingScoreColor(batScore);
+                            d3.select("#arcTop").transition().duration(500).attr("stroke", batScoreColor).style("fill",  batScoreColor );
+                            d3.select("#arcBottom").transition().duration(500).attr("stroke", bowlScoreColor).style("fill",  bowlScoreColor );
+                            d3.select("#fieldScoreArea").transition().duration(500).attr("stroke", FieldingScoreColor)
+
+                            d3.select("#bowlScoreAreaLabelMeasure").transition().duration(500).text(d3.select("#bowlMeasureFilterSelection").property("value")+": "+(batScore[0].values.BowlScore).toFixed(1));
+                            d3.select("#bowlScoreAreaLabelAvg").transition().duration(500).text("League Avg: "+(batScore[0].values.BowlScoreAggAvg).toFixed(1));
+                            d3.select("#bowlScoreAreaLabelSd").transition().duration(500).text("League Std Dev: "+(batScore[0].values.BowlScoreAggSd).toFixed(1));
+                            d3.select("#batScoreAreaLabelMeasure").transition().duration(500).text(d3.select("#batMeasureFilterSelection").property("value")+": "+(batScore[0].values.BatScore).toFixed(1));
+                            d3.select("#batScoreAreaLabelAvg").transition().duration(500).text("League Avg: "+(batScore[0].values.BatScoreAggAvg).toFixed(1));
+                            d3.select("#batScoreAreaLabelSd").transition().duration(500).text("League Std Dev: "+(batScore[0].values.BatScoreAggSd).toFixed(1));
+                            d3.select("#seasonLabel").transition().duration(500).text(d3.select("#yearFilterSelection").property("value")+ " Season");
+                        })
+
+
+
                     });
 
 

@@ -982,6 +982,10 @@ p {
                     d3.select('#yearFilterSelection').property('value', d.key);
                     var yearSelection = d.key
 
+                    d3.selectAll("#outcomeCircle").transition()
+                    //.attr("r", function (dd) {if (dd.date.getFullYear() == d.key) {return 15} else {return 8}  })
+                        .attr("stroke-width", function (dd) {if (dd.date.getFullYear() == d.key) {return 3} else {return 1}  })
+
                     d3.csv("cricketPivot.csv", function(cricketdummy){
 
                         filteredToYear  = cricketdummy.filter(function(d){return d.Year == yearSelection;});
@@ -1016,7 +1020,9 @@ p {
                         .attr('r',7.5)
                         .attr('stroke-width',1)
 
-
+                    d3.selectAll("#outcomeCircle").transition()
+                    //.attr("r", function (dd) {if (dd.date.getFullYear() == d.key) {return 15} else {return 8}  })
+                        .attr("stroke-width", function (dd) {if (dd.date.getFullYear() == d.key) {return 3} else {return 1}  })
                     d3.selectAll("#scatterUpdate").transition()
                         .style("opacity", 1.0)
                         .attr("r", 7.5);
@@ -1115,10 +1121,13 @@ p {
                 .on("mouseover", function(d) {
 
 
-
-
                     d3.select('#yearFilterSelection').property('value', d.key);
                     var yearSelection = d.key
+
+                    d3.selectAll("#outcomeCircle").transition()
+                        //.attr("r", function (dd) {if (dd.date.getFullYear() == d.key) {return 15} else {return 8}  })
+                        .attr("stroke-width", function (dd) {if (dd.date.getFullYear() == d.key) {return 3} else {return 1}  })
+
 
                     d3.selectAll("#scatterUpdate").transition()
                         .style("opacity", function(d) {if (d.key != yearSelection) {return hideOpacity} else {return 1.0}})
@@ -1168,7 +1177,9 @@ p {
                                 return low1;
                             }
                         })
-
+                    d3.selectAll("#outcomeCircle").transition()
+                    //.attr("r", function (dd) {if (dd.date.getFullYear() == d.key) {return 15} else {return 8}  })
+                        .attr("stroke-width", 1)
 
                     d3.selectAll("#scatterUpdate").transition()
                         .style("opacity", 1.0)
@@ -1326,6 +1337,7 @@ p {
                     })
                     .enter()
                     .append("circle")
+                    .attr("id","outcomeCircle")
                     .attr("r", 8)
                     .attr("cx", function (dd) {
                         return x(dd.date)

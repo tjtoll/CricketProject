@@ -59,16 +59,16 @@
 2018,Chennai Super Kings,6s,Batting,6.8125
 2015,Chennai Super Kings,6s,Batting,5.647058824
 2014,Chennai Super Kings,6s,Batting,7
-2019,Chennai Super Kings,MatchesWon,Batting,17
-2018,Chennai Super Kings,MatchesWon,Batting,16
-2015,Chennai Super Kings,MatchesWon,Batting,17
-2014,Chennai Super Kings,MatchesWon,Batting,16
-2008,Chennai Super Kings,MatchesWon,Batting,16
-2009,Chennai Super Kings,MatchesWon,Batting,14
-2010,Chennai Super Kings,MatchesWon,Batting,16
-2011,Chennai Super Kings,MatchesWon,Batting,16
-2012,Chennai Super Kings,MatchesWon,Batting,18
-2013,Chennai Super Kings,MatchesWon,Batting,18
+2019,Chennai Super Kings,MatchesWon,Batting,10
+2018,Chennai Super Kings,MatchesWon,Batting,11
+2015,Chennai Super Kings,MatchesWon,Batting,9
+2014,Chennai Super Kings,MatchesWon,Batting,9
+2008,Chennai Super Kings,MatchesWon,Batting,9
+2009,Chennai Super Kings,MatchesWon,Batting,8
+2010,Chennai Super Kings,MatchesWon,Batting,9
+2011,Chennai Super Kings,MatchesWon,Batting,11
+2012,Chennai Super Kings,MatchesWon,Batting,9
+2013,Chennai Super Kings,MatchesWon,Batting,12
 2008,Chennai Super Kings,100s,Batting,0.0625
 2009,Chennai Super Kings,100s,Batting,0
 2010,Chennai Super Kings,100s,Batting,0.0625
@@ -147,11 +147,11 @@
 2011,Chennai Super Kings,StrikeRate,Batting,127.77
 2012,Chennai Super Kings,StrikeRate,Batting,129.38
 2013,Chennai Super Kings,StrikeRate,Batting,123.74
-2008,Sunrisers Hyderabad,MatchesWon,Batting,14
-2009,Sunrisers Hyderabad,MatchesWon,Batting,16
-2010,Sunrisers Hyderabad,MatchesWon,Batting,16
-2011,Sunrisers Hyderabad,MatchesWon,Batting,14
-2012,Sunrisers Hyderabad,MatchesWon,Batting,14
+2008,Sunrisers Hyderabad,MatchesWon,Batting,2
+2009,Sunrisers Hyderabad,MatchesWon,Batting,9
+2010,Sunrisers Hyderabad,MatchesWon,Batting,8
+2011,Sunrisers Hyderabad,MatchesWon,Batting,6
+2012,Sunrisers Hyderabad,MatchesWon,Batting,4
 2008,Sunrisers Hyderabad,100s,Batting,0.142857143
 2009,Sunrisers Hyderabad,100s,Batting,0
 2010,Sunrisers Hyderabad,100s,Batting,0
@@ -307,18 +307,18 @@
 2016,Delhi Capitals,6s,Batting,4.642857143
 2015,Delhi Capitals,6s,Batting,6
 2014,Delhi Capitals,6s,Batting,4.5
-2019,Delhi Capitals,MatchesWon,Batting,16
-2018,Delhi Capitals,MatchesWon,Batting,14
-2017,Delhi Capitals,MatchesWon,Batting,14
-2016,Delhi Capitals,MatchesWon,Batting,14
-2015,Delhi Capitals,MatchesWon,Batting,14
-2014,Delhi Capitals,MatchesWon,Batting,14
-2008,Delhi Capitals,MatchesWon,Batting,14
-2009,Delhi Capitals,MatchesWon,Batting,14
-2010,Delhi Capitals,MatchesWon,Batting,14
-2011,Delhi Capitals,MatchesWon,Batting,14
-2012,Delhi Capitals,MatchesWon,Batting,18
-2013,Delhi Capitals,MatchesWon,Batting,16
+2019,Delhi Capitals,MatchesWon,Batting,9
+2018,Delhi Capitals,MatchesWon,Batting,5
+2017,Delhi Capitals,MatchesWon,Batting,6
+2016,Delhi Capitals,MatchesWon,Batting,7
+2015,Delhi Capitals,MatchesWon,Batting,5
+2014,Delhi Capitals,MatchesWon,Batting,2
+2008,Delhi Capitals,MatchesWon,Batting,7
+2009,Delhi Capitals,MatchesWon,Batting,10
+2010,Delhi Capitals,MatchesWon,Batting,7
+2011,Delhi Capitals,MatchesWon,Batting,4
+2012,Delhi Capitals,MatchesWon,Batting,11
+2013,Delhi Capitals,MatchesWon,Batting,3
 2008,Delhi Capitals,100s,Batting,0
 2009,Delhi Capitals,100s,Batting,0
 2010,Delhi Capitals,100s,Batting,0.071428571
@@ -427,8 +427,8 @@
 2016,Gujrat Lions,4s,Batting,15.0625
 2017,Gujrat Lions,6s,Batting,6.5
 2016,Gujrat Lions,6s,Batting,3.9375
-2017,Gujrat Lions,MatchesWon,Batting,14
-2016,Gujrat Lions,MatchesWon,Batting,16
+2017,Gujrat Lions,MatchesWon,Batting,4
+2016,Gujrat Lions,MatchesWon,Batting,9
 2019,Kings Xi Punjab,Matches,Matches,14
 2018,Kings Xi Punjab,Matches,Matches,14
 2017,Kings Xi Punjab,Matches,Matches,14
@@ -519,18 +519,18 @@
 2016,Kings Xi Punjab,6s,Batting,3.714285714
 2015,Kings Xi Punjab,6s,Batting,5.642857143
 2014,Kings Xi Punjab,6s,Batting,7.470588235
-2019,Kings Xi Punjab,MatchesWon,Batting,14
-2018,Kings Xi Punjab,MatchesWon,Batting,14
-2017,Kings Xi Punjab,MatchesWon,Batting,14
-2016,Kings Xi Punjab,MatchesWon,Batting,14
-2015,Kings Xi Punjab,MatchesWon,Batting,14
-2014,Kings Xi Punjab,MatchesWon,Batting,17
-2008,Kings Xi Punjab,MatchesWon,Batting,15
-2009,Kings Xi Punjab,MatchesWon,Batting,14
-2010,Kings Xi Punjab,MatchesWon,Batting,14
-2011,Kings Xi Punjab,MatchesWon,Batting,14
-2012,Kings Xi Punjab,MatchesWon,Batting,14
-2013,Kings Xi Punjab,MatchesWon,Batting,16
+2019,Kings Xi Punjab,MatchesWon,Batting,6
+2018,Kings Xi Punjab,MatchesWon,Batting,6
+2017,Kings Xi Punjab,MatchesWon,Batting,7
+2016,Kings Xi Punjab,MatchesWon,Batting,4
+2015,Kings Xi Punjab,MatchesWon,Batting,3
+2014,Kings Xi Punjab,MatchesWon,Batting,11
+2008,Kings Xi Punjab,MatchesWon,Batting,10
+2009,Kings Xi Punjab,MatchesWon,Batting,7
+2010,Kings Xi Punjab,MatchesWon,Batting,4
+2011,Kings Xi Punjab,MatchesWon,Batting,7
+2012,Kings Xi Punjab,MatchesWon,Batting,8
+2013,Kings Xi Punjab,MatchesWon,Batting,8
 2008,Kings Xi Punjab,100s,Batting,0.066666667
 2009,Kings Xi Punjab,100s,Batting,0
 2010,Kings Xi Punjab,100s,Batting,0.071428571
@@ -609,7 +609,7 @@
 2011,Kings Xi Punjab,StrikeRate,Batting,100.83
 2012,Kings Xi Punjab,StrikeRate,Batting,125
 2013,Kings Xi Punjab,StrikeRate,Batting,128.74
-2011,Kochi Tuskers Kerala,MatchesWon,Batting,14
+2011,Kochi Tuskers Kerala,MatchesWon,Batting,6
 2011,Kochi Tuskers Kerala,100s,Batting,0
 2011,Kochi Tuskers Kerala,4s,Batting,9
 2011,Kochi Tuskers Kerala,6s,Batting,3.571428571
@@ -713,18 +713,18 @@
 2016,Kolkata Knight Riders,6s,Batting,4.266666667
 2015,Kolkata Knight Riders,6s,Batting,4.571428571
 2014,Kolkata Knight Riders,6s,Batting,4.75
-2019,Kolkata Knight Riders,MatchesWon,Batting,14
-2018,Kolkata Knight Riders,MatchesWon,Batting,16
-2017,Kolkata Knight Riders,MatchesWon,Batting,16
-2016,Kolkata Knight Riders,MatchesWon,Batting,15
-2015,Kolkata Knight Riders,MatchesWon,Batting,14
-2014,Kolkata Knight Riders,MatchesWon,Batting,16
-2008,Kolkata Knight Riders,MatchesWon,Batting,13
-2009,Kolkata Knight Riders,MatchesWon,Batting,13
-2010,Kolkata Knight Riders,MatchesWon,Batting,14
-2011,Kolkata Knight Riders,MatchesWon,Batting,15
-2012,Kolkata Knight Riders,MatchesWon,Batting,17
-2013,Kolkata Knight Riders,MatchesWon,Batting,16
+2019,Kolkata Knight Riders,MatchesWon,Batting,6
+2018,Kolkata Knight Riders,MatchesWon,Batting,9
+2017,Kolkata Knight Riders,MatchesWon,Batting,8
+2016,Kolkata Knight Riders,MatchesWon,Batting,8
+2015,Kolkata Knight Riders,MatchesWon,Batting,7
+2014,Kolkata Knight Riders,MatchesWon,Batting,11
+2008,Kolkata Knight Riders,MatchesWon,Batting,6
+2009,Kolkata Knight Riders,MatchesWon,Batting,3
+2010,Kolkata Knight Riders,MatchesWon,Batting,7
+2011,Kolkata Knight Riders,MatchesWon,Batting,9
+2012,Kolkata Knight Riders,MatchesWon,Batting,12
+2013,Kolkata Knight Riders,MatchesWon,Batting,6
 2008,Kolkata Knight Riders,100s,Batting,0.076923077
 2009,Kolkata Knight Riders,100s,Batting,0
 2010,Kolkata Knight Riders,100s,Batting,0
@@ -893,18 +893,18 @@
 2016,Mumbai Indians,6s,Batting,6.5
 2015,Mumbai Indians,6s,Batting,7.5
 2014,Mumbai Indians,6s,Batting,5.733333333
-2019,Mumbai Indians,MatchesWon,Batting,16
-2018,Mumbai Indians,MatchesWon,Batting,14
-2017,Mumbai Indians,MatchesWon,Batting,17
-2016,Mumbai Indians,MatchesWon,Batting,14
-2015,Mumbai Indians,MatchesWon,Batting,16
-2014,Mumbai Indians,MatchesWon,Batting,15
-2008,Mumbai Indians,MatchesWon,Batting,14
-2009,Mumbai Indians,MatchesWon,Batting,13
-2010,Mumbai Indians,MatchesWon,Batting,15
-2011,Mumbai Indians,MatchesWon,Batting,16
-2012,Mumbai Indians,MatchesWon,Batting,17
-2013,Mumbai Indians,MatchesWon,Batting,19
+2019,Mumbai Indians,MatchesWon,Batting,11
+2018,Mumbai Indians,MatchesWon,Batting,6
+2017,Mumbai Indians,MatchesWon,Batting,12
+2016,Mumbai Indians,MatchesWon,Batting,7
+2015,Mumbai Indians,MatchesWon,Batting,10
+2014,Mumbai Indians,MatchesWon,Batting,8
+2008,Mumbai Indians,MatchesWon,Batting,7
+2009,Mumbai Indians,MatchesWon,Batting,5
+2010,Mumbai Indians,MatchesWon,Batting,11
+2011,Mumbai Indians,MatchesWon,Batting,9
+2012,Mumbai Indians,MatchesWon,Batting,10
+2013,Mumbai Indians,MatchesWon,Batting,13
 2008,Mumbai Indians,100s,Batting,0.071428571
 2009,Mumbai Indians,100s,Batting,0
 2010,Mumbai Indians,100s,Batting,0
@@ -1082,16 +1082,16 @@
 2018,Rajasthan Royals,6s,Batting,5.133333333
 2015,Rajasthan Royals,6s,Batting,4.642857143
 2014,Rajasthan Royals,6s,Batting,6.142857143
-2019,Rajasthan Royals,MatchesWon,Batting,14
-2018,Rajasthan Royals,MatchesWon,Batting,15
-2015,Rajasthan Royals,MatchesWon,Batting,14
-2014,Rajasthan Royals,MatchesWon,Batting,14
-2008,Rajasthan Royals,MatchesWon,Batting,16
-2009,Rajasthan Royals,MatchesWon,Batting,13
-2010,Rajasthan Royals,MatchesWon,Batting,14
-2011,Rajasthan Royals,MatchesWon,Batting,14
-2012,Rajasthan Royals,MatchesWon,Batting,14
-2013,Rajasthan Royals,MatchesWon,Batting,18
+2019,Rajasthan Royals,MatchesWon,Batting,5
+2018,Rajasthan Royals,MatchesWon,Batting,7
+2015,Rajasthan Royals,MatchesWon,Batting,7
+2014,Rajasthan Royals,MatchesWon,Batting,7
+2008,Rajasthan Royals,MatchesWon,Batting,12
+2009,Rajasthan Royals,MatchesWon,Batting,6
+2010,Rajasthan Royals,MatchesWon,Batting,6
+2011,Rajasthan Royals,MatchesWon,Batting,6
+2012,Rajasthan Royals,MatchesWon,Batting,7
+2013,Rajasthan Royals,MatchesWon,Batting,10
 2008,Rajasthan Royals,100s,Batting,0
 2009,Rajasthan Royals,100s,Batting,0
 2010,Rajasthan Royals,100s,Batting,0.071428571
@@ -1200,11 +1200,11 @@
 2016,Rising Pune Supergiants,4s,Batting,12.21428571
 2017,Rising Pune Supergiants,6s,Batting,5.5625
 2016,Rising Pune Supergiants,6s,Batting,4.857142857
-2017,Rising Pune Supergiants,MatchesWon,Batting,16
-2016,Rising Pune Supergiants,MatchesWon,Batting,14
-2011,Rising Pune Supergiants,MatchesWon,Batting,14
-2012,Rising Pune Supergiants,MatchesWon,Batting,14
-2013,Rising Pune Supergiants,MatchesWon,Batting,16
+2017,Rising Pune Supergiants,MatchesWon,Batting,10
+2016,Rising Pune Supergiants,MatchesWon,Batting,5
+2011,Rising Pune Supergiants,MatchesWon,Batting,4
+2012,Rising Pune Supergiants,MatchesWon,Batting,4
+2013,Rising Pune Supergiants,MatchesWon,Batting,4
 2019,Royal Challengers Bangalore,Matches,Matches,14
 2018,Royal Challengers Bangalore,Matches,Matches,14
 2017,Royal Challengers Bangalore,Matches,Matches,14
@@ -1295,18 +1295,18 @@
 2016,Royal Challengers Bangalore,6s,Batting,8.875
 2015,Royal Challengers Bangalore,6s,Batting,6.5
 2014,Royal Challengers Bangalore,6s,Batting,6.571428571
-2019,Royal Challengers Bangalore,MatchesWon,Batting,14
-2018,Royal Challengers Bangalore,MatchesWon,Batting,14
-2017,Royal Challengers Bangalore,MatchesWon,Batting,14
-2016,Royal Challengers Bangalore,MatchesWon,Batting,16
-2015,Royal Challengers Bangalore,MatchesWon,Batting,16
-2014,Royal Challengers Bangalore,MatchesWon,Batting,14
-2008,Royal Challengers Bangalore,MatchesWon,Batting,14
-2009,Royal Challengers Bangalore,MatchesWon,Batting,16
-2010,Royal Challengers Bangalore,MatchesWon,Batting,15
-2011,Royal Challengers Bangalore,MatchesWon,Batting,15
-2012,Royal Challengers Bangalore,MatchesWon,Batting,14
-2013,Royal Challengers Bangalore,MatchesWon,Batting,16
+2019,Royal Challengers Bangalore,MatchesWon,Batting,5
+2018,Royal Challengers Bangalore,MatchesWon,Batting,6
+2017,Royal Challengers Bangalore,MatchesWon,Batting,3
+2016,Royal Challengers Bangalore,MatchesWon,Batting,9
+2015,Royal Challengers Bangalore,MatchesWon,Batting,9
+2014,Royal Challengers Bangalore,MatchesWon,Batting,5
+2008,Royal Challengers Bangalore,MatchesWon,Batting,4
+2009,Royal Challengers Bangalore,MatchesWon,Batting,9
+2010,Royal Challengers Bangalore,MatchesWon,Batting,7
+2011,Royal Challengers Bangalore,MatchesWon,Batting,9
+2012,Royal Challengers Bangalore,MatchesWon,Batting,8
+2013,Royal Challengers Bangalore,MatchesWon,Batting,9
 2008,Royal Challengers Bangalore,100s,Batting,0
 2009,Royal Challengers Bangalore,100s,Batting,0.0625
 2010,Royal Challengers Bangalore,100s,Batting,0
@@ -1475,13 +1475,13 @@
 2016,Sunrisers Hyderabad,6s,Batting,5.235294118
 2015,Sunrisers Hyderabad,6s,Batting,5.642857143
 2014,Sunrisers Hyderabad,6s,Batting,5.142857143
-2019,Sunrisers Hyderabad,MatchesWon,Batting,15
-2018,Sunrisers Hyderabad,MatchesWon,Batting,17
-2017,Sunrisers Hyderabad,MatchesWon,Batting,14
-2016,Sunrisers Hyderabad,MatchesWon,Batting,17
-2015,Sunrisers Hyderabad,MatchesWon,Batting,14
-2014,Sunrisers Hyderabad,MatchesWon,Batting,14
-2013,Sunrisers Hyderabad,MatchesWon,Batting,17
+2019,Sunrisers Hyderabad,MatchesWon,Batting,6
+2018,Sunrisers Hyderabad,MatchesWon,Batting,10
+2017,Sunrisers Hyderabad,MatchesWon,Batting,9
+2016,Sunrisers Hyderabad,MatchesWon,Batting,10
+2015,Sunrisers Hyderabad,MatchesWon,Batting,7
+2014,Sunrisers Hyderabad,MatchesWon,Batting,6
+2013,Sunrisers Hyderabad,MatchesWon,Batting,10
 2013,Sunrisers Hyderabad,100s,Batting,0
 2013,Sunrisers Hyderabad,4s,Batting,11.47058824
 2013,Sunrisers Hyderabad,6s,Batting,3.176470588
